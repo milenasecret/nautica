@@ -1,0 +1,23 @@
+
+<div class="dashboard-container">
+  <!-- Page header -->
+  <header class="page-header">
+    <div class="page-heading">
+      <div>
+        <h1>{{ 'NAV.USERS' | translate }}</h1>
+        <p>{{ 'USER_REVIEW_AND_MANAGEMENT' | translate }}</p>
+      </div>
+    </div>
+  </header>
+  <!-- Alerts -->
+  <div *ngIf="message"
+       [class]="'alert alert-' + messageType">
+    {{ message }}
+  </div>
+  <main class="main-content">
+    <!-- User section -->
+    <section class="user-section">
+
+    </section>
+  </main>
+</div>

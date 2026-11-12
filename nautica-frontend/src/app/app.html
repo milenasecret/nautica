@@ -1,0 +1,59 @@
+<header class="navbar">
+
+  <a routerLink="/" class="logo" (click)="closeMenu()">
+    NK Tikvara
+  </a>
+
+  <div class="user-info">
+    <span>{{ getUserName() }}</span>
+  </div>
+
+  <button
+    class="menu-toggle"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="menuOpen"
+    aria-label="Toggle navigation">
+
+    ☰
+  </button>
+
+  <nav class="nav-menu" [class.open]="menuOpen">
+
+    <a routerLink="/dashboard"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}"
+       (click)="closeMenu()">
+      {{ 'NAV.HOME' | translate }}
+    </a>
+
+    <a routerLink="/documents"
+       routerLinkActive="active"
+       (click)="closeMenu()">
+      {{ 'NAV.DOCUMENTS' | translate }}
+    </a>
+
+    <a routerLink="/users"
+       routerLinkActive="active"
+       (click)="closeMenu()">
+      {{ 'NAV.USERS' | translate }}
+    </a>
+
+    <div class="language-buttons">
+      <button (click)="changeLanguage('sr')"><span class="fi fi-rs"></span></button>
+      <button (click)="changeLanguage('en')"><span class="fi fi-gb"></span></button>
+    </div>
+
+    <div class="btn-logout">
+      @if (isLoggedIn) {
+        <button (click)="logout()">{{'LOGOUT' | translate }}</button>
+      } @else {
+        <button (click)="login()">{{'LOGIN' | translate }}</button>
+      }
+    </div>
+  </nav>
+
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

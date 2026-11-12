@@ -1,0 +1,33 @@
+{
+  "DOCUMENTS": "Dokumenta",
+  "LOGOUT": "Odjava",
+  "UPLOAD_NEW_FILE": "Otpremi novi fajl",
+  "UPLOADING": "Otpremanje...",
+  "UPLOAD_FILE": "Otpremi fajl",
+  "YOUR_FILES": "Tvoja dokumenta",
+  "SELECTED": "Selektovano",
+  "NO_FILES_YET": "Nema jos otpremljenih fajlova",
+  "NAV": {
+    "HOME": "Početna",
+    "DOCUMENTS": "Dokumenta",
+    "USERS": "Korisnici"
+  },
+  "ABOUT": "O nama",
+  "CONTACT": "Kontakt",
+  "LOGIN": "Prijava",
+  "DOWNLOAD": "Preuzmi",
+  "DELETE": "Izbrisi",
+  "DOCUMENT_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje dokumentima",
+  "ADD_NEW_DOCUMENT": "Dodaj novi dokument u svoju kolekciju",
+  "SELECT_FILE": "Izaberi fajl",
+  "NO_FILE_SELECTED": "Nije izabran fajl",
+  "OVERVIEW_UPLOADED_DOCUMENTS": "Pregled svih otpremljenih dokumenata",
+  "SEARCH_DOCUMENTS": "Pretraži dokumente...",
+  "NEWEST_FIRST": "Najnoviji prvo",
+  "OLDEST_FIRST": "Najstariji prvo",
+  "BY_NAME": "Po nazivu",
+  "CURRENTLY_NO_UPLOADED_DOCUMENTS": "Trenutno nema otpremljenih dokumenata",
+  "NO_DOCUMENTS_FOUND": "Nema pronađenih dokumenata",
+  "TRY_ANOTHER_DOCUMENT_NAME": "Pokušaj sa drugim nazivom dokumenta",
+  "USER_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje korisnicima"
+}

@@ -1,0 +1,33 @@
+{
+  "DOCUMENTS": "Documents",
+  "LOGOUT": "Logout",
+  "UPLOAD_NEW_FILE": "Upload New File",
+  "UPLOADING": "Uploading...",
+  "UPLOAD_FILE": "Upload File",
+  "YOUR_FILES": "Your Files",
+  "SELECTED": "Selected",
+  "NO_FILES_YET": "No files uploaded yet",
+  "NAV": {
+    "HOME": "Home",
+    "DOCUMENTS": "Documents",
+    "USERS": "Users"
+  },
+  "ABOUT": "About us",
+  "CONTACT": "Contact",
+  "LOGIN": "Login",
+  "DOWNLOAD": "Download",
+  "DELETE": "Delete",
+  "DOCUMENT_REVIEW_AND_MANAGEMENT": "Document review and management",
+  "ADD_NEW_DOCUMENT": "Add a new document to your collection",
+  "SELECT_FILE": "Select file",
+  "NO_FILE_SELECTED": "No file selected",
+  "OVERVIEW_UPLOADED_DOCUMENTS": "Overview of all uploaded documents",
+  "SEARCH_DOCUMENTS": "Search documents...",
+  "NEWEST_FIRST": "Newest first",
+  "OLDEST_FIRST": "Oldest first",
+  "BY_NAME": "By name",
+  "CURRENTLY_NO_UPLOADED_DOCUMENTS": "There are currently no uploaded documents",
+  "NO_DOCUMENTS_FOUND": "No documents found",
+  "TRY_ANOTHER_DOCUMENT_NAME": "Try another document name",
+  "USER_REVIEW_AND_MANAGEMENT": "User overview and management"
+}

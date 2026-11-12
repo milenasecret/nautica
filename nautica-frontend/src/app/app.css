@@ -1,0 +1,121 @@
+/* Glavna navigacija */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #263445;
+  color: white;
+  padding: 15px 25px;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.user-info {
+  display: flex;
+}
+
+.user-info span {
+  color: #e7e7e7;
+}
+
+/* Navigacioni meni */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: #64b5f6;
+}
+
+/* Izbor jezika */
+.language-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.language-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+.language-buttons button span {
+  font-size: 20px;
+}
+
+.btn-logout button {
+  padding: 7px 12px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+/* Hamburger dugme */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* Telefoni i manji ekrani */
+@media (max-width: 768px) {
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 18px;
+    padding: 20px 0 10px;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-menu a {
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  .language-buttons {
+    margin-top: 5px;
+  }
+
+  .btn-logout {
+    margin-top: 5px;
+  }
+
+}
