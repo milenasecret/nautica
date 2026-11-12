@@ -1,0 +1,90 @@
+
+# =========================
+# JAVA / MAVEN
+# =========================
+
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# Java crash files
+hs_err_pid*
+replay_pid*
+
+# =========================
+# SPRING BOOT
+# =========================
+
+application-local.properties
+application-local.yml
+application-dev.properties
+application-dev.yml
+
+# =========================
+# INTELLIJ IDEA
+# =========================
+
+.idea/
+*.iml
+*.iws
+out/
+
+# =========================
+# ECLIPSE
+# =========================
+
+.project
+.classpath
+.settings/
+
+# =========================
+# ANGULAR / NODE
+# =========================
+
+node_modules/
+dist/
+.angular/
+.npm/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# =========================
+# VISUAL STUDIO CODE
+# =========================
+
+.vscode/
+
+# =========================
+# DOCKER
+# =========================
+
+# Docker volumes and local data
+postgres_data/
+uploads/
+
+# =========================
+# OPERATING SYSTEM
+# =========================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =========================
+# TEMPORARY FILES
+# =========================
+
+*.tmp
+*.temp
+*.bak
+*.swp
