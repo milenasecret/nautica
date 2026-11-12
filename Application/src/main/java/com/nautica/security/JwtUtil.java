@@ -1,4 +1,4 @@
-package com.filemanagement.security;
+package com.nautica.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

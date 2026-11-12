@@ -1,7 +1,7 @@
-package com.filemanagement.controller;
+package com.nautica.controller;
 
-import com.filemanagement.dto.*;
-import com.filemanagement.service.AuthService;
+import com.nautica.dto.*;
+import com.nautica.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

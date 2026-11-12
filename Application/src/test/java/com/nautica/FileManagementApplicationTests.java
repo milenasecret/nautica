@@ -1,4 +1,4 @@
-package com.filemanagement;
+package com.nautica;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
-package com.filemanagement.security;
+package com.nautica.security;
 
-import com.filemanagement.repository.UserRepository;
+import com.nautica.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

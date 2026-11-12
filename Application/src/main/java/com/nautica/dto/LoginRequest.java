@@ -1,4 +1,4 @@
-package com.filemanagement.dto;
+package com.nautica.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.filemanagement.security;
+package com.nautica.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

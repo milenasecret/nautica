@@ -1,4 +1,4 @@
-package com.filemanagement.model;
+package com.nautica.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

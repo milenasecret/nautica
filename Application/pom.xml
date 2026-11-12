@@ -8,11 +8,11 @@
 		<version>4.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.filemanagement</groupId>
+	<groupId>com.nautica</groupId>
 	<artifactId>Application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>File Management Application</name>
-	<description>Spring boot project for file management</description>
+	<name>Nautica Application</name>
+	<description>Spring boot project for nautical club</description>
 	<url/>
 	<licenses>
 		<license/>

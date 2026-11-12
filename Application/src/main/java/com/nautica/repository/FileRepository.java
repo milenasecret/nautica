@@ -1,6 +1,6 @@
-package com.filemanagement.repository;
+package com.nautica.repository;
 
-import com.filemanagement.model.FileEntity;
+import com.nautica.model.FileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;

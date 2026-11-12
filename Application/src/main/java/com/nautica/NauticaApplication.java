@@ -1,4 +1,4 @@
-package com.filemanagement;
+package com.nautica;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

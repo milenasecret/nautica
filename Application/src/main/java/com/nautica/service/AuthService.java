@@ -1,9 +1,9 @@
-package com.filemanagement.service;
+package com.nautica.service;
 
-import com.filemanagement.dto.*;
-import com.filemanagement.model.User;
-import com.filemanagement.repository.UserRepository;
-import com.filemanagement.security.JwtUtil;
+import com.nautica.dto.*;
+import com.nautica.model.User;
+import com.nautica.repository.UserRepository;
+import com.nautica.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
