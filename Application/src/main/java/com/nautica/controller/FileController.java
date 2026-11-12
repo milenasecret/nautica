@@ -9,6 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,7 @@ public class FileController {
 
     //upload file
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FileResponse> uploadFile(
             @RequestParam("file") MultipartFile file,
             Authentication auth) throws IOException {
@@ -68,6 +70,7 @@ public class FileController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse> deleteFile(
             @PathVariable Long id,
             Authentication auth) {

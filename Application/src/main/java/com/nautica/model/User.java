@@ -27,7 +27,7 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Boolean isAdmin;
 
     @Column(nullable = true)
