@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-news',
   imports: [],
   templateUrl: './news.html',
-  styleUrl: './news.css',
+  styleUrl: './news.scss',
 })
 export class NewsComponent {
 

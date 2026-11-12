@@ -6,6 +6,10 @@ body {
   color: #333;
 }
 
+.user-dialog-panel .mat-mdc-dialog-container {
+  border-radius: 14px;
+}
+
 /* General layout */
 .dashboard-container {
   min-height: 100vh;
@@ -62,6 +66,16 @@ body {
 
   .page-header {
     padding: 24px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .user-dialog-panel {
+    max-width: 100vw !important;
+  }
+
+  .user-dialog-panel .mat-mdc-dialog-container {
+    border-radius: 14px 14px 0 0;
   }
 }
 

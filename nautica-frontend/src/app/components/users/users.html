@@ -18,6 +18,350 @@
     <!-- User section -->
     <section class="user-section">
 
+
+      <div class="users-container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+
+          <div class="page-title">
+            <h2>Korisnici</h2>
+            <p>Upravljanje korisnicima sistema</p>
+          </div>
+
+          <button
+            mat-flat-button
+            color="primary"
+            class="add-button"
+            (click)="addUser()">
+
+            <mat-icon>add</mat-icon>
+            Dodaj korisnika
+
+          </button>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-container">
+
+          <mat-form-field appearance="outline" class="search-field">
+
+            <mat-label>Pretraži korisnike</mat-label>
+
+            <mat-icon matPrefix>search</mat-icon>
+
+            <input
+              matInput
+              [(ngModel)]="searchText"
+              (ngModelChange)="applyFilter()"
+              placeholder="Ime, username ili email...">
+
+            <button
+              *ngIf="searchText"
+              matSuffix
+              mat-icon-button
+              aria-label="Obriši pretragu"
+              (click)="searchText = ''; applyFilter()">
+
+              <mat-icon>close</mat-icon>
+
+            </button>
+
+          </mat-form-field>
+
+          <div class="users-count">
+            Ukupno: <strong>{{dataSource.filteredData.length}}</strong>
+          </div>
+
+        </div>
+
+        <!-- DESKTOP TABLE -->
+        <div class="table-container">
+
+          <table mat-table [dataSource]="dataSource">
+
+            <!-- ID -->
+            <ng-container matColumnDef="id">
+
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+
+              <td mat-cell *matCellDef="let user">
+                {{user.id}}
+              </td>
+
+            </ng-container>
+
+            <!-- FIRSTNAME -->
+            <ng-container matColumnDef="firstname">
+
+              <th mat-header-cell *matHeaderCellDef>Ime</th>
+
+              <td mat-cell *matCellDef="let user">
+                {{user.firstname || '-'}}
+              </td>
+
+            </ng-container>
+
+            <!-- LASTNAME -->
+            <ng-container matColumnDef="lastname">
+
+              <th mat-header-cell *matHeaderCellDef>Prezime</th>
+
+              <td mat-cell *matCellDef="let user">
+                {{user.lastname || '-'}}
+              </td>
+
+            </ng-container>
+
+            <!-- ADDRESS -->
+            <ng-container matColumnDef="address">
+
+              <th mat-header-cell *matHeaderCellDef>Adresa</th>
+
+              <td mat-cell *matCellDef="let user">
+                {{user.address || '-'}}
+              </td>
+
+            </ng-container>
+
+            <!-- USERNAME -->
+            <ng-container matColumnDef="username">
+
+              <th mat-header-cell *matHeaderCellDef>Username</th>
+
+              <td mat-cell *matCellDef="let user">
+                <strong>{{user.username}}</strong>
+              </td>
+
+            </ng-container>
+
+            <!-- EMAIL -->
+            <ng-container matColumnDef="email">
+
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+
+              <td mat-cell *matCellDef="let user">
+                {{user.email}}
+              </td>
+
+            </ng-container>
+
+            <!-- ADMIN -->
+            <ng-container matColumnDef="isAdmin">
+
+              <th mat-header-cell *matHeaderCellDef>Uloga</th>
+
+              <td mat-cell *matCellDef="let user">
+
+          <span
+            class="role-badge"
+            [class.admin]="user.isAdmin"
+            [class.regular]="!user.isAdmin">
+
+            {{user.isAdmin ? 'Administrator' : 'Korisnik'}}
+
+          </span>
+
+              </td>
+
+            </ng-container>
+
+            <!-- ACTIONS -->
+            <ng-container matColumnDef="actions">
+
+              <th mat-header-cell *matHeaderCellDef>Akcije</th>
+
+              <td mat-cell *matCellDef="let user">
+
+                <button
+                  mat-icon-button
+                  color="primary"
+                  matTooltip="Izmeni korisnika"
+                  (click)="editUser(user)">
+
+                  <mat-icon>edit</mat-icon>
+
+                </button>
+
+                <button
+                  mat-icon-button
+                  color="warn"
+                  matTooltip="Obriši korisnika"
+                  (click)="deleteUser(user)">
+
+                  <mat-icon>delete_outline</mat-icon>
+
+                </button>
+
+              </td>
+
+            </ng-container>
+
+            <!-- TABLE ROWS -->
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns">
+            </tr>
+
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns">
+            </tr>
+
+            <!-- EMPTY TABLE -->
+            <tr class="mat-mdc-row" *matNoDataRow>
+
+              <td class="mat-mdc-cell empty-cell"
+                  [attr.colspan]="displayedColumns.length">
+
+                Nema korisnika za prikaz.
+
+              </td>
+
+            </tr>
+
+          </table>
+
+        </div>
+
+        <!-- MOBILE CARDS -->
+        <div class="mobile-users">
+
+          <div
+            class="user-card"
+            *ngFor="let user of pagedUsers">
+
+            <!-- CARD HEADER -->
+            <div class="user-card-header">
+
+              <div class="avatar">
+
+                {{user.username.charAt(0).toUpperCase()}}
+
+              </div>
+
+              <div class="user-info">
+
+                <strong>{{user.username}}</strong>
+
+                <span>{{user.email}}</span>
+
+              </div>
+
+              <span
+                class="role-badge"
+                [class.admin]="user.isAdmin"
+                [class.regular]="!user.isAdmin">
+
+          {{user.isAdmin ? 'Admin' : 'Korisnik'}}
+
+        </span>
+
+            </div>
+
+            <!-- CARD DETAILS -->
+            <div class="user-details">
+
+              <div class="detail">
+
+                <span>Ime</span>
+
+                <strong>{{user.firstname || '-'}}</strong>
+
+              </div>
+
+              <div class="detail">
+
+                <span>Prezime</span>
+
+                <strong>{{user.lastname || '-'}}</strong>
+
+              </div>
+
+              <div class="detail">
+
+                <span>Adresa</span>
+
+                <strong>{{user.address || '-'}}</strong>
+
+              </div>
+
+              <div class="detail">
+
+                <span>ID</span>
+
+                <strong>{{user.id}}</strong>
+
+              </div>
+
+            </div>
+
+            <!-- CARD ACTIONS -->
+            <div class="card-actions">
+
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="editUser(user)">
+
+                <mat-icon>edit</mat-icon>
+                Izmeni
+
+              </button>
+
+              <button
+                mat-stroked-button
+                color="warn"
+                (click)="deleteUser(user)">
+
+                <mat-icon>delete_outline</mat-icon>
+                Obriši
+
+              </button>
+
+            </div>
+
+          </div>
+
+          <div
+            *ngIf="pagedUsers.length === 0"
+            class="empty-message">
+
+            <mat-icon>person_search</mat-icon>
+
+            <p>Nema korisnika za prikaz.</p>
+
+          </div>
+
+        </div>
+
+        <!-- PAGINATOR -->
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[10, 25, 50]"
+          showFirstLastButtons
+          aria-label="Stranice korisnika">
+
+        </mat-paginator>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </section>
   </main>
 </div>

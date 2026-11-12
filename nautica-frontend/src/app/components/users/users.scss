@@ -1,0 +1,314 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.users-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* HEADER */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #263449;
+  }
+
+  p {
+    margin: 0;
+    color: #8993a4;
+    font-size: 14px;
+  }
+}
+
+.add-button {
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 0 18px;
+}
+
+/* SEARCH */
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.search-field {
+  width: 350px;
+  max-width: 100%;
+}
+
+.users-count {
+  color: #8993a4;
+  font-size: 14px;
+  white-space: nowrap;
+
+  strong {
+    color: #263449;
+  }
+}
+
+/* TABLE */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #edf0f4;
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+}
+
+th.mat-mdc-header-cell {
+  background: #f7f9fc;
+  color: #536176;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td.mat-mdc-cell,
+th.mat-mdc-header-cell {
+  padding: 14px 16px;
+}
+
+tr.mat-mdc-row:hover {
+  background: #f8faff;
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 30px !important;
+  color: #8993a4;
+}
+
+/* ROLE BADGES */
+
+.role-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.role-badge.admin {
+  background: #e8f1ff;
+  color: #2864bd;
+}
+
+.role-badge.regular {
+  background: #e8f7ee;
+  color: #24834b;
+}
+
+/* MOBILE */
+
+.mobile-users {
+  display: none;
+}
+
+.user-card {
+  background: #fff;
+  border: 1px solid #e9edf2;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.user-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  background: #e8f1ff;
+  color: #2864bd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+
+  strong {
+    color: #263449;
+    font-size: 15px;
+  }
+
+  span {
+    color: #8993a4;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+}
+
+.user-details {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+  padding: 14px 0;
+  border-top: 1px solid #edf0f4;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+
+  span {
+    color: #8993a4;
+    flex-shrink: 0;
+  }
+
+  strong {
+    color: #354258;
+    font-weight: 500;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+
+  button {
+    flex: 1;
+    min-height: 42px;
+    border-radius: 8px;
+  }
+}
+
+.empty-message {
+  padding: 30px;
+  text-align: center;
+  color: #8993a4;
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* TABLET AND MOBILE */
+
+@media (max-width: 900px) {
+  .users-container {
+    padding: 16px;
+  }
+
+  .table-container {
+    display: none;
+  }
+
+  .mobile-users {
+    display: block;
+  }
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 480px) {
+  .users-container {
+    padding: 12px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .page-title h2 {
+    font-size: 22px;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  .users-count {
+    margin-bottom: 12px;
+  }
+
+  .user-card {
+    padding: 13px;
+  }
+
+  .user-card-header {
+    gap: 9px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .role-badge {
+    font-size: 10px;
+    padding: 4px 7px;
+  }
+
+  .card-actions {
+    gap: 8px;
+
+    button {
+      font-size: 12px;
+    }
+  }
+}

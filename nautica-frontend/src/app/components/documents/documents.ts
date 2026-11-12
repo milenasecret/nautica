@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     FormsModule],
   templateUrl: './documents.html',
-  styleUrls: ['./documents.css']
+  styleUrls: ['./documents.scss']
 })
 export class DocumentsComponent implements OnInit {
   documents: Document[] = [];

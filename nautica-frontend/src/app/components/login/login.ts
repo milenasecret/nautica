@@ -11,7 +11,7 @@ import { LoginRequest } from '../../models/user.model';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.scss']
 })
 export class LoginComponent {
   loginData: LoginRequest = {

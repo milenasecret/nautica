@@ -1,11 +1,13 @@
 
 export interface User {
-  username: string;
-  email: string;
-  isAdmin: boolean;
+  id?: number;
   firstname?: string;
   lastname?: string;
   address?: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+  password?: string;
 }
 
 export interface LoginRequest {
