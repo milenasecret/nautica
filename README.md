@@ -90,20 +90,16 @@ A secure web application that allows users to upload, manage, and download their
 
 #### 2. Setup Database
 ```sql
-CREATE DATABASE filemanager_db;
+CREATE DATABASE nautica_db;
 ```
 
 #### 3. Configure Backend
 Update `src/main/resources/application.properties`:
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/filemanager_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/nautica_db
 spring.datasource.username=YOUR_USERNAME
 spring.datasource.password=YOUR_PASSWORD
 
-jwt.secret=mySecretKeyForJWTTokenGenerationAndValidation123456789
-jwt.expiration=86400000
-
-file.upload-dir=./uploads
 ```
 
 #### 4. Run Backend

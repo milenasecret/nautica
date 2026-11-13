@@ -2,15 +2,26 @@ package com.nautica.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User {
+
+    public User(String username, String email, String password, Boolean isAdmin, String firstname, String lastname, String address, LocalDateTime createdAt) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.createdAt = createdAt;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +36,7 @@ public class User {
     @Column(nullable = false)
     private String password;// Will be stored as Bcrypt hash
 
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -38,12 +50,4 @@ public class User {
 
     @Column(nullable = true)
     private String address;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<FileEntity> documents = new ArrayList<>();
-
-    @PrePersist
-    void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
 }

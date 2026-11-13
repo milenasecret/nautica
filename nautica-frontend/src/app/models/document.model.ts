@@ -4,6 +4,7 @@ export interface Document {
   filesize: number;
   filetype: string;
   uploadedAt: string;
+  uploadedBy: string;
 }
 
 /**

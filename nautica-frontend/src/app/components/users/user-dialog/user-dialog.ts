@@ -97,12 +97,9 @@ export class UserDialogComponent {
       address: formValue.address || null,
       username: formValue.username,
       email: formValue.email,
+      password: formValue.password,
       isAdmin: formValue.isAdmin ?? false
     };
-
-    if (formValue.password) {
-      user['password'] = formValue.password;
-    }
 
     this.dialogRef.close(user);
   }

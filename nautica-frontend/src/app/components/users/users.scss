@@ -1,9 +1,3 @@
-
-:host {
-  display: block;
-  width: 100%;
-}
-
 .users-container {
   width: 100%;
   max-width: 1400px;
@@ -12,29 +6,9 @@
   box-sizing: border-box;
 }
 
-/* HEADER */
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  h2 {
-    margin: 0 0 6px;
-    font-size: 26px;
-    font-weight: 600;
-    color: #263449;
-  }
-
-  p {
-    margin: 0;
-    color: #8993a4;
-    font-size: 14px;
-  }
+.user-header {
+   display: flex;
+   justify-content: flex-end;
 }
 
 .add-button {
@@ -44,18 +18,12 @@
 }
 
 /* SEARCH */
-
 .search-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 12px;
-}
-
-.search-field {
-  width: 350px;
-  max-width: 100%;
 }
 
 .users-count {
@@ -69,7 +37,6 @@
 }
 
 /* TABLE */
-
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -83,21 +50,9 @@ table {
   min-width: 900px;
 }
 
-th.mat-mdc-header-cell {
-  background: #f7f9fc;
-  color: #536176;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-td.mat-mdc-cell,
-th.mat-mdc-header-cell {
-  padding: 14px 16px;
-}
-
-tr.mat-mdc-row:hover {
-  background: #f8faff;
+.mat-mdc-header-row {
+  background-color: var(--mat-sys-primary);
+  color: #ffffff
 }
 
 .empty-cell {
@@ -107,7 +62,6 @@ tr.mat-mdc-row:hover {
 }
 
 /* ROLE BADGES */
-
 .role-badge {
   display: inline-block;
   padding: 5px 10px;
@@ -128,7 +82,6 @@ tr.mat-mdc-row:hover {
 }
 
 /* MOBILE */
-
 .mobile-users {
   display: none;
 }
@@ -235,7 +188,6 @@ tr.mat-mdc-row:hover {
 }
 
 /* TABLET AND MOBILE */
-
 @media (max-width: 900px) {
   .users-container {
     padding: 16px;
@@ -251,16 +203,9 @@ tr.mat-mdc-row:hover {
 }
 
 /* SMALL PHONES */
-
 @media (max-width: 480px) {
   .users-container {
     padding: 12px;
-  }
-
-  .page-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
   }
 
   .page-title h2 {
@@ -275,10 +220,6 @@ tr.mat-mdc-row:hover {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-  }
-
-  .search-field {
-    width: 100%;
   }
 
   .users-count {

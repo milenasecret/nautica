@@ -9,12 +9,14 @@ public class FileResponse {
     private Long filesize;
     private String filetype;
     private String uploadedAt;
+    private String uploadedBy;
 
-    public FileResponse(Long id, String filename, Long filesize, String filetype, String uploadedAt) {
+    public FileResponse(Long id, String filename, Long filesize, String filetype, String uploadedAt, String uploadedBy) {
         this.id = id;
         this.filename = filename;
         this.filesize = filesize;
         this.filetype = filetype;
         this.uploadedAt = uploadedAt;
+        this.uploadedBy = uploadedBy;
     }
 }

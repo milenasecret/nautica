@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FileService {
-
-
     private final FileRepository fileRepository;
     private final UserRepository userRepository;
 
@@ -42,16 +40,13 @@ public class FileService {
             Files.createDirectories(uploadPath);
         }
 
-
         // Generate unique filename
         String originalFilename = file.getOriginalFilename();
         String uniqueFilename = UUID.randomUUID() + "_" + originalFilename;
         Path filePath = uploadPath.resolve(uniqueFilename);
 
-
         // Save file to disk
         Files.copy(file.getInputStream(), filePath);
-
 
         // Save metadata to database
         FileEntity fileEntity = new FileEntity();
@@ -66,28 +61,19 @@ public class FileService {
         return toFileResponse(fileEntity);
     }
 
-
     // Get all files for a user
-    public List<FileResponse> getUserFiles(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        return fileRepository.findByUserId(user.getId())
+    public List<FileResponse> getAllFiles() {
+        return fileRepository.findAll()
                 .stream()
                 .map(this::toFileResponse)
                 .collect(Collectors.toList());
     }
 
-
     //Download a file
 
-    public Resource downloadFile(Long fileId, String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        FileEntity fileEntity = fileRepository.findByIdAndUserId(fileId, user.getId())
-                .orElseThrow(() -> new RuntimeException("File not found or access denied"));
-
+    public Resource downloadFile(Long fileId) {
+        FileEntity fileEntity = fileRepository.findById(fileId)
+                .orElseThrow(() -> new RuntimeException("File not found"));
         try {
             Path filePath = Paths.get(fileEntity.getFilepath());
             Resource resource = new UrlResource(filePath.toUri());
@@ -103,21 +89,15 @@ public class FileService {
     }
 
     //Get file metadata (for download headers)
-    public FileEntity getFileMetadata(Long fileId, String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        return fileRepository.findByIdAndUserId(fileId, user.getId())
-                .orElseThrow(() -> new RuntimeException("File not found or access denied"));
+    public FileEntity getFileMetadata(Long fileId) {
+        return fileRepository.findById(fileId)
+                .orElseThrow(() -> new RuntimeException("File not found"));
     }
 
     //Delete a file
-    public void deleteFile(Long fileId, String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        FileEntity fileEntity = fileRepository.findByIdAndUserId(fileId, user.getId())
-                .orElseThrow(() -> new RuntimeException("File not found or access denied"));
+    public void deleteFile(Long fileId) {
+        FileEntity fileEntity = fileRepository.findById(fileId)
+                .orElseThrow(() -> new RuntimeException("File not found"));
 
         // Delete physical file
         try {
@@ -137,9 +117,8 @@ public class FileService {
                 entity.getFilename(),
                 entity.getFilesize(),
                 entity.getFiletype(),
-                entity.getUploadedAt().toString()
+                entity.getUploadedAt().toString(),
+                entity.getUser().getUsername()
         );
     }
-
-
 }

@@ -4,7 +4,6 @@
   "UPLOAD_NEW_FILE": "Otpremi novi fajl",
   "UPLOADING": "Otpremanje...",
   "UPLOAD_FILE": "Otpremi fajl",
-  "YOUR_FILES": "Tvoja dokumenta",
   "SELECTED": "Selektovano",
   "NO_FILES_YET": "Nema jos otpremljenih fajlova",
   "NAV": {
@@ -17,6 +16,8 @@
   "LOGIN": "Prijava",
   "DOWNLOAD": "Preuzmi",
   "DELETE": "Izbrisi",
+  "EDIT": "Izmeni",
+  "CANCEL": "Otkaži",
   "DOCUMENT_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje dokumentima",
   "ADD_NEW_DOCUMENT": "Dodaj novi dokument u svoju kolekciju",
   "SELECT_FILE": "Izaberi fajl",
@@ -29,5 +30,30 @@
   "CURRENTLY_NO_UPLOADED_DOCUMENTS": "Trenutno nema otpremljenih dokumenata",
   "NO_DOCUMENTS_FOUND": "Nema pronađenih dokumenata",
   "TRY_ANOTHER_DOCUMENT_NAME": "Pokušaj sa drugim nazivom dokumenta",
-  "USER_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje korisnicima"
+  "USER_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje korisnicima",
+  "ADD_USER": "Dodaj korisnika",
+  "NAME_USERNAME_OR_EMAIL": "Ime, username ili email...",
+  "TOTAL": "Ukupno",
+  "USER": "Korisnik",
+  "ADMINISTRATOR": "Administrator",
+  "ACTIONS": "Akcije",
+  "EDIT_USER": "Izmeni korisnika",
+  "DELETE_USER": "Obriši korisnika",
+  "NO_USERS_TO_SHOW": "Nema korisnika za prikaz",
+  "FIRSTNAME": "Ime",
+  "LASTNAME": "Prezime",
+  "ADDRESS": "Adresa",
+  "ROLE": "Uloga",
+  "USER_PAGES": "Stranice korisnika",
+  "PAGINATOR": {
+    "ITEMS_PER_PAGE": "Redova po stranici:",
+    "NEXT_PAGE": "Sledeća stranica",
+    "PREVIOUS_PAGE": "Prethodna stranica",
+    "FIRST_PAGE": "Prva stranica",
+    "LAST_PAGE": "Poslednja stranica",
+    "RANGE": "{{start}}–{{end}} od {{length}}"
+  },
+  "USER_DELETED": "Korisnik je uspešno obrisan",
+  "USER_UPDATED": "Korisnik je uspešno izmenjen",
+  "USER_CREATED": "Korisnik je uspešno kreiran"
 }

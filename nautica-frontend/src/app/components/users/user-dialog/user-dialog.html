@@ -1,170 +1,119 @@
-
 <h2 mat-dialog-title class="dialog-title">
-
   <mat-icon>{{isEdit ? 'edit' : 'person_add'}}</mat-icon>
-
   {{isEdit ? 'Izmeni korisnika' : 'Dodaj korisnika'}}
-
 </h2>
 
 <mat-dialog-content>
-
   <form [formGroup]="userForm" class="user-form">
-
     <!-- FIRSTNAME -->
     <mat-form-field appearance="outline">
-
       <mat-label>Ime</mat-label>
-
       <input
         matInput
         formControlName="firstname"
         placeholder="Unesi ime">
-
     </mat-form-field>
 
     <!-- LASTNAME -->
     <mat-form-field appearance="outline">
-
       <mat-label>Prezime</mat-label>
-
       <input
         matInput
         formControlName="lastname"
         placeholder="Unesi prezime">
-
     </mat-form-field>
 
     <!-- ADDRESS -->
     <mat-form-field appearance="outline">
-
       <mat-label>Adresa</mat-label>
-
       <input
         matInput
         formControlName="address"
         placeholder="Unesi adresu">
-
     </mat-form-field>
 
     <!-- USERNAME -->
     <mat-form-field appearance="outline">
-
       <mat-label>Username *</mat-label>
-
       <input
         matInput
         formControlName="username"
         placeholder="Unesi username">
-
       <mat-error
         *ngIf="userForm.controls['username'].hasError('required')">
-
         Username je obavezan.
-
       </mat-error>
 
     </mat-form-field>
-
     <!-- EMAIL -->
     <mat-form-field appearance="outline">
-
       <mat-label>Email *</mat-label>
-
       <input
         matInput
         type="email"
         formControlName="email"
         placeholder="Unesi email">
-
       <mat-error
         *ngIf="userForm.controls['email'].hasError('required')">
-
         Email je obavezan.
-
       </mat-error>
-
       <mat-error
         *ngIf="userForm.controls['email'].hasError('email')">
-
         Unesi ispravnu email adresu.
-
       </mat-error>
-
     </mat-form-field>
 
     <!-- PASSWORD -->
     <mat-form-field appearance="outline">
-
       <mat-label>
         Password {{isEdit ? '(opciono)' : '*'}}
       </mat-label>
-
       <input
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         formControlName="password"
         [placeholder]="isEdit ? 'Unesi novi password' : 'Unesi password'">
-
       <button
         mat-icon-button
         matSuffix
         type="button"
         (click)="hidePassword = !hidePassword">
-
         <mat-icon>
           {{hidePassword ? 'visibility_off' : 'visibility'}}
         </mat-icon>
-
       </button>
-
       <mat-error *ngIf="userForm.controls['password'].hasError('required')">
         Password je obavezan.
       </mat-error>
-
     </mat-form-field>
 
     <!-- IS ADMIN -->
     <div class="admin-option">
-
       <mat-checkbox formControlName="isAdmin">
-
         Administrator
-
       </mat-checkbox>
-
       <span>
         Administrator ima privilegije za upravljanje sistemom.
       </span>
-
     </div>
-
   </form>
-
 </mat-dialog-content>
 
 <!-- ACTIONS -->
 <mat-dialog-actions align="end">
-
   <button
     mat-button
     type="button"
     (click)="cancel()">
-
     Otkaži
-
   </button>
 
   <button
     mat-flat-button
-    color="primary"
+    class="primary-color"
     type="button"
     (click)="save()">
-
     <mat-icon>save</mat-icon>
-
     {{isEdit ? 'Sačuvaj izmene' : 'Dodaj korisnika'}}
-
   </button>
-
 </mat-dialog-actions>

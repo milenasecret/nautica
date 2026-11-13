@@ -4,7 +4,6 @@
   "UPLOAD_NEW_FILE": "Upload New File",
   "UPLOADING": "Uploading...",
   "UPLOAD_FILE": "Upload File",
-  "YOUR_FILES": "Your Files",
   "SELECTED": "Selected",
   "NO_FILES_YET": "No files uploaded yet",
   "NAV": {
@@ -17,6 +16,8 @@
   "LOGIN": "Login",
   "DOWNLOAD": "Download",
   "DELETE": "Delete",
+  "EDIT": "Edit",
+  "CANCEL": "Cancel",
   "DOCUMENT_REVIEW_AND_MANAGEMENT": "Document review and management",
   "ADD_NEW_DOCUMENT": "Add a new document to your collection",
   "SELECT_FILE": "Select file",
@@ -29,5 +30,30 @@
   "CURRENTLY_NO_UPLOADED_DOCUMENTS": "There are currently no uploaded documents",
   "NO_DOCUMENTS_FOUND": "No documents found",
   "TRY_ANOTHER_DOCUMENT_NAME": "Try another document name",
-  "USER_REVIEW_AND_MANAGEMENT": "User overview and management"
+  "USER_REVIEW_AND_MANAGEMENT": "User overview and management",
+  "ADD_USER": "Add User",
+  "NAME_USERNAME_OR_EMAIL": "Name, username, or email...",
+  "TOTAL": "Total",
+  "USER": "User",
+  "ADMINISTRATOR": "Administrator",
+  "ACTIONS": "Actions",
+  "EDIT_USER": "Edit User",
+  "DELETE_USER": "Delete User",
+  "NO_USERS_TO_SHOW": "No users to show",
+  "FIRSTNAME": "Firstname",
+  "LASTNAME": "Lastname",
+  "ADDRESS": "Address",
+  "ROLE": "Role",
+  "USER_PAGES": "User Pages",
+  "PAGINATOR": {
+    "ITEMS_PER_PAGE": "Items per page:",
+    "NEXT_PAGE": "Next page",
+    "PREVIOUS_PAGE": "Previous page",
+    "FIRST_PAGE": "First page",
+    "LAST_PAGE": "Last page",
+    "RANGE": "{{start}}–{{end}} of {{length}}"
+  },
+  "USER_DELETED": "User successfully deleted",
+  "USER_UPDATED": "User successfully updated",
+  "USER_CREATED": "User successfully created"
 }

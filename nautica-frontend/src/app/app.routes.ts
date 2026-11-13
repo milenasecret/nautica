@@ -7,22 +7,13 @@ import {DocumentsComponent} from './components/documents/documents';
 import {NewsComponent} from './components/news/news';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/news', pathMatch: 'full' },
+  { path: '', redirectTo: 'news', pathMatch: 'full' },
+
+  { path: 'news', component: NewsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {
-    path: 'documents',
-    component: DocumentsComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'news',
-    component: NewsComponent
-  },
-  { path: '**', redirectTo: '/news' }
+  { path: 'documents', component: DocumentsComponent },
+  { path: 'users', component: UsersComponent, canActivate: [authGuard] },
+
+  { path: '**', redirectTo: 'news' }
 ];

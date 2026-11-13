@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
 import {UserService} from '../../services/user';
 import {User} from '../../models/user.model';
-import { MatButtonModule } from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { FormsModule } from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -15,6 +15,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {UserDialogComponent} from './user-dialog/user-dialog';
+import {UserDialogDeleteComponent} from './user-dialog-delete/user-dialog-delete';
 
 @Component({
   selector: 'app-users',
@@ -36,11 +37,10 @@ import {UserDialogComponent} from './user-dialog/user-dialog';
   styleUrl: './users.scss',
 })
 export class UsersComponent implements OnInit, AfterViewInit {
-  // users: User[] = [];
   message = '';
   messageType: 'success' | 'error' = 'success';
 
-  // Kolone koje prikazujemo u tabeli
+  // columns in table
   displayedColumns: string[] = [
     'id',
     'firstname',
@@ -55,7 +55,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
   // Angular Material data source
   dataSource = new MatTableDataSource<User>([]);
 
-  // Tekst pretrage
   searchText = '';
 
   // Paginator
@@ -64,12 +63,14 @@ export class UsersComponent implements OnInit, AfterViewInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadUsers();
-    // Pretraga po više polja
+    // searching using more fields
     this.dataSource.filterPredicate = (
       user: User,
       filter: string
@@ -84,7 +85,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         (user.address ?? '').toLowerCase().includes(searchValue) ||
         user.username.toLowerCase().includes(searchValue) ||
         user.email.toLowerCase().includes(searchValue) ||
-        (user.isAdmin ? 'admin administrator da' : 'korisnik ne').includes(searchValue)
+        (user.isAdmin ? 'admin administrator da' : 'korisnik user ne').includes(searchValue)
       );
     };
   }
@@ -95,7 +96,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         this.dataSource.data = users;
       },
       error: () => {
-        this.showMessage('Greška prilikom učitavanja korisnika');
+        this.showMessage('Greška prilikom učitavanja korisnika', 'error');
       }
     });
   }
@@ -104,7 +105,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  // Pretraga
+  // search
   applyFilter(): void {
 
     this.dataSource.filter = this.searchText.trim().toLowerCase();
@@ -114,7 +115,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Korisnici za prikaz na mobilnom telefonu
+  // users to show on mobile phone
   get pagedUsers(): User[] {
 
     const filteredUsers = this.dataSource.filteredData;
@@ -127,7 +128,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     return filteredUsers.slice(startIndex, startIndex + pageSize);
   }
 
-  // Otvaranje forme za dodavanje
+  // open dialog
   addUser(): void {
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -147,23 +148,23 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
       this.userService.createUser(result).subscribe({
         next: () => {
-          this.showMessage('Korisnik je uspešno dodat');
+          this.showMessage('USER_CREATED', 'success');
           this.loadUsers();
         },
         error: () => {
-          this.showMessage('Greška prilikom dodavanja korisnika');
+          this.showMessage('Greška prilikom dodavanja korisnika', 'error');
         }
       });
     });
   }
-  // Otvaranje forme za izmenu
+
   editUser(user: User): void {
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '500px',
       maxWidth: '95vw',
       maxHeight: '95vh',
-      data: { ...user },
+      data: {...user},
       autoFocus: false,
       panelClass: 'user-dialog-panel'
     });
@@ -176,45 +177,49 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
       this.userService.updateUser(user.id!, result).subscribe({
         next: () => {
-          this.showMessage('Korisnik je uspešno izmenjen');
+          this.showMessage('USER_UPDATED', 'success');
           this.loadUsers();
         },
         error: () => {
-          this.showMessage('Greška prilikom izmene korisnika');
+          this.showMessage('Greška prilikom izmene korisnika', 'error');
         }
       });
     });
   }
 
-  // Brisanje korisnika
   deleteUser(user: User): void {
+    const dialogRefDelete = this.dialog.open(UserDialogDeleteComponent, {
+      width: '500px',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
+      data: {...user},
+      autoFocus: false,
+      panelClass: 'user-dialog-panel'
+    });
 
-    const confirmed = confirm(
-      `Da li sigurno želiš da obrišeš korisnika ${user.username}?`
-    );
+    dialogRefDelete.afterClosed().subscribe(result => {
 
-    if (!confirmed) {
-      return;
-    }
-
-    this.userService.deleteUser(user.id!).subscribe({
-      next: () => {
-        this.showMessage('Korisnik je uspešno obrisan');
-        this.loadUsers();
-      },
-      error: () => {
-        this.showMessage('Greška prilikom brisanja korisnika');
+      if (!result) {
+        return;
       }
+
+      this.userService.deleteUser(result).subscribe({
+        next: () => {
+          this.showMessage('USER_UPDATED', 'success');
+          this.loadUsers();
+        },
+        error: () => {
+          this.showMessage('Greška prilikom brisanja korisnika', 'error');
+        }
+      });
     });
   }
 
-  // Prikaz poruka
-  showMessage(message: string): void {
-
-    this.snackBar.open(message, 'Zatvori', {
-      duration: 3000,
-      horizontalPosition: 'end',
-      verticalPosition: 'bottom'
-    });
+  private showMessage(msg: string, type: 'success' | 'error'): void {
+    this.message = this.translate.instant(msg);
+    this.messageType = type;
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
   }
 }

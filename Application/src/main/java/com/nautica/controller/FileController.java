@@ -25,7 +25,6 @@ public class FileController {
 
     private final FileService fileService;
 
-
     //upload file
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -38,29 +37,23 @@ public class FileController {
         return ResponseEntity.ok(response);
     }
 
-
-    //fetch all users
+    //fetch all files
     @GetMapping
-    public ResponseEntity<List<FileResponse>> getUserFiles(Authentication auth) {
-        String username = auth.getName();
-        List<FileResponse> files = fileService.getUserFiles(username);
+    public ResponseEntity<List<FileResponse>> getAllFiles() {
+        List<FileResponse> files = fileService.getAllFiles();
         return ResponseEntity.ok(files);
     }
-
 
     //Download a file
     @GetMapping("/{id}")
     public ResponseEntity<Resource> downloadFile(
-            @PathVariable Long id,
-            Authentication auth) {
-
-        String username = auth.getName();
+            @PathVariable Long id) {
 
         // Get file metadata for headers
-        FileEntity metadata = fileService.getFileMetadata(id, username);
+        FileEntity metadata = fileService.getFileMetadata(id);
 
         // Get file content
-        Resource resource = fileService.downloadFile(id, username);
+        Resource resource = fileService.downloadFile(id);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(metadata.getFiletype()))
@@ -72,12 +65,8 @@ public class FileController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse> deleteFile(
-            @PathVariable Long id,
-            Authentication auth) {
-
-        String username = auth.getName();
-        fileService.deleteFile(id, username);
-
+            @PathVariable Long id) {
+        fileService.deleteFile(id);
         return ResponseEntity.ok(new ApiResponse(true, "File deleted successfully"));
     }
 }

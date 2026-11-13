@@ -5,6 +5,8 @@ import { routes } from './app.routes';
 import { jwtInterceptor } from './interceptors/jwt-interceptor';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 import {provideTranslateService} from '@ngx-translate/core';
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {CustomPaginatorIntl} from './services/custom-paginator-intl.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +22,10 @@ export const appConfig: ApplicationConfig = {
       }),
       lang: 'sr',
       fallbackLang: 'sr'
-    })
+    }),
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomPaginatorIntl
+    }
   ]
 };

@@ -41,7 +41,7 @@
           {{ selectedFile ? selectedFile.name : ('NO_FILE_SELECTED' | translate) }}
         </span>
         <button
-          class="btn-upload"
+          class="primary-button btn-upload"
           (click)="uploadFile()"
           [disabled]="!selectedFile || isUploading"
         >
@@ -60,7 +60,7 @@
     <section class="documents-section">
       <div class="documents-heading">
         <div>
-          <h2>{{ 'YOUR_FILES' | translate }}</h2>
+          <h2>{{ 'DOCUMENTS' | translate }}</h2>
           <p>{{ 'OVERVIEW_UPLOADED_DOCUMENTS' | translate }}</p>
         </div>
         <span class="document-count">
@@ -99,9 +99,6 @@
                 {{ getFileIcon(doc.filetype) }}
               </mat-icon>
             </div>
-            <span class="file-type">
-              {{ doc.filetype }}
-            </span>
           </div>
           <div class="document-info">
             <h3 [title]="doc.filename">
@@ -115,6 +112,10 @@
               <span>
                 <mat-icon>calendar_today</mat-icon>
                 {{ formatDate(doc.uploadedAt) }}
+              </span>
+              <span>
+                <mat-icon>person</mat-icon>
+                {{ doc.uploadedBy }}
               </span>
             </div>
           </div>

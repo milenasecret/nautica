@@ -1,9 +1,9 @@
-
 .dialog-title {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #263449;
+  color: #ffffff;
+  background-color: var(--mat-sys-primary);
 }
 
 .user-form {
@@ -29,6 +29,10 @@ mat-form-field {
     color: #8993a4;
     padding-left: 30px;
   }
+}
+
+.user-form {
+    padding-top: 12px;
 }
 
 mat-dialog-actions {
