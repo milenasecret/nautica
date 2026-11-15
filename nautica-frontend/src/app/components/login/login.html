@@ -1,49 +1,83 @@
-<div class="login-container">
-  <div class="login-card">
-    <h2>Login</h2>
-    
-    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input 
-          type="text" 
-          id="username" 
-          name="username"
-          [(ngModel)]="loginData.username"
-          required
-          class="form-control"
-          placeholder="Enter username"
-        />
+<div class="dashboard-container">
+  <!-- Page header -->
+  <header class="page-header">
+    <div class="page-heading">
+      <div>
+        <h1></h1>
       </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password"
-          [(ngModel)]="loginData.password"
-          required
-          class="form-control"
-          placeholder="Enter password"
-        />
-      </div>
-
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-
-      <button 
-        type="submit" 
-        class="btn-primary"
-        [disabled]="!loginForm.valid || isLoading"
-      >
-        {{ isLoading ? 'Logging in...' : 'Login' }}
-      </button>
-    </form>
-
-    <p class="register-link">
-      Don't have an account? <a routerLink="/register">Register here</a>
-    </p>
+    </div>
+  </header>
+  <!-- Alerts -->
+  <div *ngIf="errorMessage"
+       class="alert alert-error">
+    {{ errorMessage }}
   </div>
+  <main class="main-content">
+    <!-- login section -->
+    <section class="login-section">
+      <div class="login-card">
+        <h2>{{ 'LOGIN' | translate }}</h2>
+
+        <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Username *</mat-label>
+              <input
+                matInput
+                formControlName="username"
+                [placeholder]="'TYPE_USERNAME' | translate">
+              <mat-error
+                *ngIf="loginForm.controls['username'].hasError('required')">
+                {{'USERNAME_IS_REQUIRED' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Password *
+              </mat-label>
+              <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                [placeholder]="'TYPE_PASSWORD' | translate">
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword">
+                <mat-icon>
+                  {{hidePassword ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                {{'PASSWORD_IS_REQUIRED' | translate}}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+          <div class="button-container">
+            <button
+              mat-flat-button
+              class="primary-color"
+              type="button"
+              [disabled]="!loginForm.valid || isLoading"
+              (click)="onLogin()"
+            >
+              {{ isLoading ? ('LOGGING' | translate) : ('SEND' | translate) }}
+            </button>
+          </div>
+        </form>
+
+        <p class="register-link">
+          {{ 'FORGOT_PASSWORD' | translate }}? <a routerLink="/forgot-password">{{ 'RESET_IT_HERE' | translate }}</a>
+        </p>
+      </div>
+
+      <!--end login section-->
+    </section>
+  </main>
 </div>

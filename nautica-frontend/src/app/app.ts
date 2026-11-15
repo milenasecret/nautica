@@ -11,7 +11,7 @@ import {
   TranslateService
 } from '@ngx-translate/core';
 import {AuthService} from './services/auth';
-import {User} from './models/user.model';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,8 @@ import {User} from './models/user.model';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    TranslatePipe
+    TranslatePipe,
+    MatIconModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -58,6 +59,6 @@ export class AppComponent {
   }
 
   login(): void {
-    this.router.navigate(['/login']);
+     this.router.navigate(['/login']);
   }
 }

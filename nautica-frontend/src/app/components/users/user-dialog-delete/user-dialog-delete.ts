@@ -2,10 +2,7 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
+  ReactiveFormsModule
 } from '@angular/forms';
 
 import {
@@ -21,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { User } from '../../../models/user.model';
-import {TranslatePipe} from '@ngx-translate/core';
+import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-dialog-delete',
@@ -45,13 +42,18 @@ export class UserDialogDeleteComponent {
   userIdToDelete:number | null = null;
 
   constructor(
+    private translate: TranslateService,
     private dialogRef: MatDialogRef<UserDialogDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User | null
   ) {
     if (data) {
       let firstName = data.firstname != null ? data.firstname : '';
       let lastName = data.lastname != null ? data.lastname : '';
-      this.messageToShow = 'Are you sure that you want to delete user ' + firstName + ' ' + lastName +' with username ' + data.username;
+      this.messageToShow = this.translate.instant('DELETE_USER_CONFIRMATION', {
+        firstName: firstName,
+        lastName: lastName,
+        username: data.username
+      });
       if (data.id != null) {
         this.userIdToDelete = data.id;
       }

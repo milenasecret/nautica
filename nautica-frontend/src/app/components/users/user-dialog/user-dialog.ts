@@ -21,12 +21,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { User } from '../../../models/user.model';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-dialog',
   standalone: true,
   imports: [
     CommonModule,
+    TranslatePipe,
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -81,7 +83,6 @@ export class UserDialogComponent {
       this.userForm.controls['password'].updateValueAndValidity();
     }
   }
-
 
   save(): void {
     if (this.userForm.invalid) {

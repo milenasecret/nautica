@@ -36,16 +36,6 @@ export class AuthService {
   }
 
   /**
-   * Register a new user
-   */
-  register(request: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, request)
-      .pipe(
-        tap(response => this.handleAuthResponse(response))
-      );
-  }
-
-  /**
    * Login user
    */
   login(request: LoginRequest): Observable<AuthResponse> {
@@ -53,6 +43,13 @@ export class AuthService {
       .pipe(
         tap(response => this.handleAuthResponse(response))
       );
+  }
+
+  /**
+   * forgot Password
+   */
+  forgotPassword(email: string): Observable<void> {
+     return this.http.post<void>(`${this.apiUrl}/forgot-password?email=${email}`, null);
   }
 
   /**
@@ -86,8 +83,8 @@ export class AuthService {
     // Update current user subject
     this.currentUserSubject.next(null);
 
-    // Navigate to login
-    this.router.navigate(['/login']);
+    // Navigate to news
+    this.router.navigate(['/news']);
   }
 
   /**

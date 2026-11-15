@@ -44,9 +44,21 @@
 
     <div class="btn-logout">
       @if (isLoggedIn) {
-        <button (click)="logout()">{{'LOGOUT' | translate }}</button>
+        <button
+          mat-flat-button
+          type="button"
+          (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          {{'LOGOUT' | translate }}
+        </button>
       } @else {
-        <button (click)="login()">{{'LOGIN' | translate }}</button>
+        <button
+          mat-flat-button
+          type="button"
+          (click)="login()">
+          <mat-icon>login</mat-icon>
+          {{'LOGIN' | translate }}
+        </button>
       }
     </div>
   </nav>

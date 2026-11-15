@@ -1,35 +1,35 @@
 <h2 mat-dialog-title class="dialog-title">
   <mat-icon>{{isEdit ? 'edit' : 'person_add'}}</mat-icon>
-  {{isEdit ? 'Izmeni korisnika' : 'Dodaj korisnika'}}
+  {{isEdit ? ('EDIT_USER' | translate) : ('ADD_USER' | translate)}}
 </h2>
 
 <mat-dialog-content>
-  <form [formGroup]="userForm" class="user-form">
+  <form [formGroup]="userForm" class="dialog-content">
     <!-- FIRSTNAME -->
     <mat-form-field appearance="outline">
-      <mat-label>Ime</mat-label>
+      <mat-label>{{'FIRSTNAME' | translate}}</mat-label>
       <input
         matInput
         formControlName="firstname"
-        placeholder="Unesi ime">
+        [placeholder]="'TYPE_NAME' | translate">
     </mat-form-field>
 
     <!-- LASTNAME -->
     <mat-form-field appearance="outline">
-      <mat-label>Prezime</mat-label>
+      <mat-label>{{'LASTNAME' | translate}}</mat-label>
       <input
         matInput
         formControlName="lastname"
-        placeholder="Unesi prezime">
+        [placeholder]="'TYPE_LASTNAME' | translate">
     </mat-form-field>
 
     <!-- ADDRESS -->
     <mat-form-field appearance="outline">
-      <mat-label>Adresa</mat-label>
+      <mat-label>{{'ADDRESS' | translate}}</mat-label>
       <input
         matInput
         formControlName="address"
-        placeholder="Unesi adresu">
+        [placeholder]="'TYPE_ADDRESS' | translate">
     </mat-form-field>
 
     <!-- USERNAME -->
@@ -38,10 +38,10 @@
       <input
         matInput
         formControlName="username"
-        placeholder="Unesi username">
+        [placeholder]="'TYPE_USERNAME' | translate">
       <mat-error
         *ngIf="userForm.controls['username'].hasError('required')">
-        Username je obavezan.
+        {{'USERNAME_IS_REQUIRED' | translate}}
       </mat-error>
 
     </mat-form-field>
@@ -52,27 +52,27 @@
         matInput
         type="email"
         formControlName="email"
-        placeholder="Unesi email">
+        [placeholder]="'TYPE_EMAIL' | translate">
       <mat-error
         *ngIf="userForm.controls['email'].hasError('required')">
-        Email je obavezan.
+        {{'EMAIL_IS_REQUIRED' | translate}}
       </mat-error>
       <mat-error
         *ngIf="userForm.controls['email'].hasError('email')">
-        Unesi ispravnu email adresu.
+        {{'ENTER_RIGHT_EMAIL' | translate}}
       </mat-error>
     </mat-form-field>
 
     <!-- PASSWORD -->
     <mat-form-field appearance="outline">
       <mat-label>
-        Password {{isEdit ? '(opciono)' : '*'}}
+        Password {{isEdit ? '('+('OPTIONAL' | translate) +')' : '*'}}
       </mat-label>
       <input
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         formControlName="password"
-        [placeholder]="isEdit ? 'Unesi novi password' : 'Unesi password'">
+        [placeholder]="isEdit ? ('TYPE_NEW_PASSWORD' | translate) : ('TYPE_PASSWORD' | translate)">
       <button
         mat-icon-button
         matSuffix
@@ -83,7 +83,7 @@
         </mat-icon>
       </button>
       <mat-error *ngIf="userForm.controls['password'].hasError('required')">
-        Password je obavezan.
+        {{'PASSWORD_IS_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
 
@@ -93,7 +93,7 @@
         Administrator
       </mat-checkbox>
       <span>
-        Administrator ima privilegije za upravljanje sistemom.
+        {{'ADMINISTRATOR_HAS_RIGHTS' | translate}}
       </span>
     </div>
   </form>
@@ -105,7 +105,7 @@
     mat-button
     type="button"
     (click)="cancel()">
-    Otkaži
+    {{'CANCEL' | translate}}
   </button>
 
   <button
@@ -114,6 +114,6 @@
     type="button"
     (click)="save()">
     <mat-icon>save</mat-icon>
-    {{isEdit ? 'Sačuvaj izmene' : 'Dodaj korisnika'}}
+    {{isEdit ? ('SAVE' | translate) : ('ADD_USER' | translate)}}
   </button>
 </mat-dialog-actions>

@@ -43,7 +43,7 @@
   color: #64b5f6;
 }
 
-/* Izbor jezika */
+/* Languages */
 .language-buttons {
   display: flex;
   gap: 8px;
@@ -63,12 +63,19 @@
 }
 
 .btn-logout button {
-  padding: 7px 12px;
   border: 1px solid white;
   border-radius: 5px;
-  background: transparent;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
   cursor: pointer;
+}
+.btn-logout button:hover {
+  color: var(--mat-sys-primary);
+  border: 1px solid var(--mat-sys-primary);
 }
 
 /* Hamburger dugme */
@@ -111,10 +118,6 @@
   }
 
   .language-buttons {
-    margin-top: 5px;
-  }
-
-  .btn-logout {
     margin-top: 5px;
   }
 
