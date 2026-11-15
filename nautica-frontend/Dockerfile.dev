@@ -1,7 +1,0 @@
-FROM node:22-alpine
-
-WORKDIR /app
-
-RUN npm install -g @angular/cli
-
-CMD ["sh", "-c", "npm ci && ng serve --host 0.0.0.0 --poll 1000"]
