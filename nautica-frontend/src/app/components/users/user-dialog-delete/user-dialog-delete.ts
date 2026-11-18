@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { User } from '../../../models/user.model';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {AuthService} from '../../../services/auth';
 
 @Component({
   selector: 'app-user-dialog-delete',
@@ -26,13 +27,9 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
   imports: [
     CommonModule,
     TranslatePipe,
-    ReactiveFormsModule,
     MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
-    MatIconModule,
-    MatCheckboxModule
+    MatIconModule
   ],
   templateUrl: './user-dialog-delete.html',
   styleUrl: './user-dialog-delete.scss'
@@ -43,6 +40,7 @@ export class UserDialogDeleteComponent {
 
   constructor(
     private translate: TranslateService,
+    private authService : AuthService,
     private dialogRef: MatDialogRef<UserDialogDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User | null
   ) {
@@ -54,7 +52,7 @@ export class UserDialogDeleteComponent {
         lastName: lastName,
         username: data.username
       });
-      if (data.id != null) {
+      if ((data.id != null) && (this.authService.getCurrentUserId() != data.id)) {
         this.userIdToDelete = data.id;
       }
     }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+  --mat-sort-arrow-color: #FFFFFF;
   --icon-color: var(--mat-sys-on-surface);
   --icon-primary-color: var(--mat-sys-primary);
   --icon-warn-color: var(--mat-sys-error);
@@ -48,7 +49,11 @@
 .main-content {
   margin: 0 auto;
   padding: 10px 24px;
+  .primary-color-font {
+    color: var(--mat-sys-primary);
+  }
 }
+
 /*search box */
 .search-box {
   display: flex;

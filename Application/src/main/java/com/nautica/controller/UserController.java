@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<UserResponse>> getAllUsers(){
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
@@ -32,9 +33,14 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponse> updateUser(@RequestBody User userToUpdate, @PathVariable Long id) {
         UserResponse response = userService.updateUser(userToUpdate, id);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
+        UserResponse response = userService.getUserResponseById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -45,4 +51,9 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/current-user")
+    public ResponseEntity<UserResponse> updateCurrentUser(@RequestBody User userToUpdate) {
+        UserResponse response = userService.updateCurrentUser(userToUpdate);
+        return ResponseEntity.ok(response);
+    }
 }

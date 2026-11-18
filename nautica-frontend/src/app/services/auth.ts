@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { AuthResponse, LoginRequest, RegisterRequest, User } from '../models/user.model';
+import { AuthResponse, LoginRequest, User } from '../models/user.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,12 +25,13 @@ export class AuthService {
   private getUserFromStorage(): User | null {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
     const email = localStorage.getItem('email');
     const isAdmin = localStorage.getItem('isAdmin');
     const isAdminBool: boolean = isAdmin === 'true';
 
-    if (token && username && email && isAdminBool) {
-      return { username, email, isAdmin:isAdminBool};
+    if (token && username && email && isAdminBool && id) {
+      return { username:username, email:email, isAdmin:isAdminBool, id:Number(id)};
     }
     return null;
   }
@@ -49,7 +50,27 @@ export class AuthService {
    * forgot Password
    */
   forgotPassword(email: string): Observable<void> {
-     return this.http.post<void>(`${this.apiUrl}/forgot-password?email=${email}`, null);
+     return this.http.post<void>(`${this.apiUrl}/forgot-password`, {email: email});
+  }
+
+  /**
+   * reset Password
+   */
+  resetPassword(
+    token: string,
+    newPassword: string
+  ): Observable<string> {
+
+    return this.http.post(
+      `${this.apiUrl}/reset-password`,
+      {
+        token: token,
+        newPassword: newPassword
+      },
+      {
+        responseType: 'text'
+      }
+    );
   }
 
   /**
@@ -61,12 +82,33 @@ export class AuthService {
     localStorage.setItem('username', response.username);
     localStorage.setItem('email', response.email);
     localStorage.setItem('isAdmin', String(response.isAdmin));
+    localStorage.setItem('id', String(response.id));
 
     // Update current user subject
     this.currentUserSubject.next({
       username: response.username,
       email: response.email,
+      id: response.id,
       isAdmin: response.isAdmin
+    });
+  }
+
+  /**
+   * Handle change current user response (save token and user info)
+   */
+   handleCurrentUserResponse(response: User): void {
+    // Store in localStorage
+    localStorage.setItem('username', response.username);
+    localStorage.setItem('email', response.email);
+    localStorage.setItem('id', String(response.id));
+    localStorage.setItem('isAdmin', String(response.isAdmin));
+
+    // Update current user subject
+    this.currentUserSubject.next({
+      username: response.username,
+      email: response.email,
+      isAdmin: response.isAdmin,
+      id: response.id
     });
   }
 
@@ -79,6 +121,7 @@ export class AuthService {
     localStorage.removeItem('username');
     localStorage.removeItem('email');
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('id');
 
     // Update current user subject
     this.currentUserSubject.next(null);
@@ -106,5 +149,23 @@ export class AuthService {
    */
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  /**
+   * Get current username
+   */
+  getCurrentUsername() {
+    return this.currentUserSubject.value?.username;
+  }
+
+  /**
+   * Get current user id
+   */
+  getCurrentUserId() {
+    return this.currentUserSubject.value?.id;
+  }
+
+  adminIsLogged(): boolean {
+    return this.currentUserSubject.value?.isAdmin === true;
   }
 }

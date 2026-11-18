@@ -27,4 +27,5 @@ export interface AuthResponse {
   email: string;
   message: string;
   isAdmin: boolean;
+  id: number;
 }

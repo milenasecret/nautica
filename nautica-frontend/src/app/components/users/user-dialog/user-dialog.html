@@ -4,7 +4,7 @@
 </h2>
 
 <mat-dialog-content>
-  <form [formGroup]="userForm" class="dialog-content">
+  <form (ngSubmit)="save()" [formGroup]="userForm" class="dialog-content">
     <!-- FIRSTNAME -->
     <mat-form-field appearance="outline">
       <mat-label>{{'FIRSTNAME' | translate}}</mat-label>
@@ -86,7 +86,7 @@
         {{'PASSWORD_IS_REQUIRED' | translate}}
       </mat-error>
     </mat-form-field>
-
+    @if(!isCurrentUser){
     <!-- IS ADMIN -->
     <div class="admin-option">
       <mat-checkbox formControlName="isAdmin">
@@ -96,6 +96,7 @@
         {{'ADMINISTRATOR_HAS_RIGHTS' | translate}}
       </span>
     </div>
+    }
   </form>
 </mat-dialog-content>
 
@@ -111,7 +112,7 @@
   <button
     mat-flat-button
     class="primary-color"
-    type="button"
+    type="submit"
     (click)="save()">
     <mat-icon>save</mat-icon>
     {{isEdit ? ('SAVE' | translate) : ('ADD_USER' | translate)}}

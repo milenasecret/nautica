@@ -78,6 +78,9 @@ export class DocumentsComponent implements OnInit {
 
     return result;
   }
+   adminIsLogged(){
+     return this.authService.adminIsLogged();
+   }
 
   getFileIcon(fileType: string): string {
     if (fileType?.startsWith('image/')) {

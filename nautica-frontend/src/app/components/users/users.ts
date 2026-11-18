@@ -16,6 +16,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {UserDialogComponent} from './user-dialog/user-dialog';
 import {UserDialogDeleteComponent} from './user-dialog-delete/user-dialog-delete';
+import {MatSort, MatSortModule} from '@angular/material/sort';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +25,7 @@ import {UserDialogDeleteComponent} from './user-dialog-delete/user-dialog-delete
     TranslatePipe,
     FormsModule,
     MatTableModule,
+    MatSortModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
@@ -39,7 +41,7 @@ import {UserDialogDeleteComponent} from './user-dialog-delete/user-dialog-delete
 export class UsersComponent implements OnInit, AfterViewInit {
   message = '';
   messageType: 'success' | 'error' = 'success';
-
+  @ViewChild(MatSort) sort!: MatSort;
   // columns in table
   displayedColumns: string[] = [
     'id',
@@ -103,6 +105,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   // search

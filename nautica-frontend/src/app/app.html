@@ -3,11 +3,18 @@
   <a routerLink="/" class="logo" (click)="closeMenu()">
     NK Tikvara
   </a>
-
-  <div class="user-info">
-    <span>{{ getUserName() }}</span>
+  @if(userIsLogged()){
+  <div class="btn-logout current-user-top">
+    <button
+      mat-button
+      [matTooltip]="'EDIT_USER' | translate"
+      type="button"
+      (click)="editCurrentUser()">
+      <mat-icon>account_circle</mat-icon>
+      {{ getCurrentUsername() }}
+    </button>
   </div>
-
+  }
   <button
     class="menu-toggle"
     (click)="toggleMenu()"
@@ -24,18 +31,20 @@
        (click)="closeMenu()">
       {{ 'NAV.HOME' | translate }}
     </a>
-
+    @if(isLoggedIn){
     <a routerLink="/documents"
        routerLinkActive="active"
        (click)="closeMenu()">
       {{ 'NAV.DOCUMENTS' | translate }}
     </a>
-
+    }
+    @if(adminIsLogged()){
     <a routerLink="/users"
        routerLinkActive="active"
        (click)="closeMenu()">
       {{ 'NAV.USERS' | translate }}
     </a>
+    }
 
     <div class="language-buttons">
       <button (click)="changeLanguage('sr')"><span class="fi fi-rs"></span></button>
@@ -44,21 +53,21 @@
 
     <div class="btn-logout">
       @if (isLoggedIn) {
-        <button
-          mat-flat-button
-          type="button"
-          (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          {{'LOGOUT' | translate }}
-        </button>
+      <button
+        mat-flat-button
+        type="button"
+        (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        {{'LOGOUT' | translate }}
+      </button>
       } @else {
-        <button
-          mat-flat-button
-          type="button"
-          (click)="login()">
-          <mat-icon>login</mat-icon>
-          {{'LOGIN' | translate }}
-        </button>
+      <button
+        mat-flat-button
+        type="button"
+        (click)="login()">
+        <mat-icon>login</mat-icon>
+        {{'LOGIN' | translate }}
+      </button>
       }
     </div>
   </nav>

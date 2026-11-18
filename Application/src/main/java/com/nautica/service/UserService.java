@@ -5,7 +5,11 @@ import com.nautica.dto.UserResponse;
 import com.nautica.model.FileEntity;
 import com.nautica.model.User;
 import com.nautica.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,11 +54,17 @@ public class UserService {
         return mapUserToUserResponse(userRepository.save(userToSave));
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
+    }
+
+    public UserResponse getUserResponseById(Long id) {
+        return mapUserToUserResponse(userRepository.save(getUserById(id)));
+    }
+
     public UserResponse updateUser(User userToUpdate, Long id) {
-        Optional<User> oFoundUser = userRepository.findById(id);
-        if (oFoundUser.isEmpty()) {
-            throw new RuntimeException("User does not exist");
-        }
+        User foundUser = getUserById(id);
         userToUpdate.setId(id);
         if (userRepository.existsByUsernameExcludeId(userToUpdate.getUsername(), id).isPresent()) {
             throw new RuntimeException("Username already exists");
@@ -65,14 +75,29 @@ public class UserService {
         }
 
         // This updates user
-        LocalDateTime createdAt = oFoundUser.get().getCreatedAt();
+        LocalDateTime createdAt = foundUser.getCreatedAt();
         userToUpdate.setCreatedAt(createdAt);
-        if (!userToUpdate.getPassword().isBlank()) {
-            userToUpdate.setPassword(passwordEncoder.encode(userToUpdate.getPassword()));
-        } else {
-            userToUpdate.setPassword(passwordEncoder.encode(oFoundUser.get().getPassword()));
-        }
+
+        String encodedPassword = userToUpdate.getPassword().isBlank()
+                ? foundUser.getPassword()
+                : passwordEncoder.encode(userToUpdate.getPassword());
+
+        userToUpdate.setPassword(encodedPassword);
 
         return mapUserToUserResponse(userRepository.save(userToUpdate));
+    }
+
+    public UserResponse updateCurrentUser(User userToUpdate) {
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        assert authentication != null;
+        String username = authentication.getName();
+        User loggedUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        Long loggedUserId = loggedUser.getId();
+
+        return updateUser(userToUpdate, loggedUserId);
     }
 }

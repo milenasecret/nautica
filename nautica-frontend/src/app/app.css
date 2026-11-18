@@ -17,13 +17,6 @@
   text-decoration: none;
 }
 
-.user-info {
-  display: flex;
-}
-
-.user-info span {
-  color: #e7e7e7;
-}
 
 /* Navigacioni meni */
 .nav-menu {
@@ -76,6 +69,11 @@
 .btn-logout button:hover {
   color: var(--mat-sys-primary);
   border: 1px solid var(--mat-sys-primary);
+}
+
+.current-user-top button,
+.current-user-top button:hover {
+  border: none;
 }
 
 /* Hamburger dugme */

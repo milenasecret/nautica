@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./Application
+      dockerfile: Dockerfile.dev
+
+    working_dir: /workspace
+
+    command:
+      - mvn
+      - "-Dspring-boot.run.jvmArguments=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      - spring-boot:run
+
+    ports:
+      - "5005:5005"
+
+    volumes:
+      - ./Application:/workspace
+      - maven_cache:/root/.m2
+
+  frontend:
+    build:
+      context: ./nautica-frontend
+      dockerfile: Dockerfile.dev
+    command: npx ng serve --host 0.0.0.0 --port 80 --poll 1000
+    volumes:
+      - ./nautica-frontend:/app
+      - /app/node_modules
+
+volumes:
+  maven_cache:

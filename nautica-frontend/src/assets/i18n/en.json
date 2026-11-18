@@ -20,7 +20,7 @@
   "EDIT": "Edit",
   "CANCEL": "Cancel",
   "SAVE": "Save",
-  "DOCUMENT_REVIEW_AND_MANAGEMENT": "Document review and management",
+  "CLOSE": "Close",
   "ADD_NEW_DOCUMENT": "Add a new document to your collection",
   "SELECT_FILE": "Select file",
   "NO_FILE_SELECTED": "No file selected",
@@ -79,5 +79,6 @@
   "RESET_PASSWORD": "Reset password",
   "LOGIN_FAILED": "Login failed. Please try again",
   "FORGOT_PASSWORD_TEXT": "Enter the email address associated with your account. We will email you with a link to reset your password. Follow the instructions in the email to create a new password. The reset link is valid for 15 minutes.",
-  "FORGOT_PASSWORD_FAILED": "A password reset request was not sent. Please try again"
+  "FORGOT_PASSWORD_FAILED": "A password reset request was not sent. Please try again",
+  "RESET_PASSWORD_TEXT": "Enter new password"
 }

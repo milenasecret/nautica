@@ -1,10 +1,12 @@
 package com.nautica.controller;
 
 import com.nautica.dto.*;
+import com.nautica.model.User;
 import com.nautica.service.AuthService;
 import com.nautica.service.PasswordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,13 +23,22 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(
-            @RequestParam String email) {
+    public ResponseEntity<Void> forgotPassword(@RequestBody ForgotPasswordRequest request) {
 
-        passwordService.forgotPassword(email);
+        passwordService.forgotPassword(request.getEmail());
 
-        return ResponseEntity.ok(
-                "If the account exists, an email will be sent."
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<Void> resetPassword(
+            @RequestBody ResetPasswordRequest request) {
+
+        authService.resetPassword(
+                request.getToken(),
+                request.getNewPassword()
         );
+
+        return ResponseEntity.ok().build();
     }
 }

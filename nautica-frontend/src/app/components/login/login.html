@@ -16,7 +16,7 @@
     <!-- login section -->
     <section class="login-section">
       <div class="login-card">
-        <h2>{{ 'LOGIN' | translate }}</h2>
+        <h2 class="primary-color-font">{{ 'LOGIN' | translate }}</h2>
 
         <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
 
@@ -63,7 +63,7 @@
             <button
               mat-flat-button
               class="primary-color"
-              type="button"
+              type="submit"
               [disabled]="!loginForm.valid || isLoading"
               (click)="onLogin()"
             >

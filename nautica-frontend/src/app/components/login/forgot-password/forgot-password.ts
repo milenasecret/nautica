@@ -51,12 +51,11 @@ export class ForgotPasswordComponent {
     const formValue = this.forgotPasswordForm.getRawValue();
 
     this.authService.forgotPassword(formValue.email).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigate(['/news']);
       },
-      error: (error) => {
-        const loginFailed = this.translate.instant('FORGOT_PASSWORD_FAILED');
-        this.errorMessage = error.error?.message || loginFailed;
+      error: () => {
+        this.errorMessage = this.translate.instant('FORGOT_PASSWORD_FAILED');
         this.isLoading = false;
       },
       complete: () => {

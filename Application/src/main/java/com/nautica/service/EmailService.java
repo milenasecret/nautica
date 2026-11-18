@@ -25,7 +25,7 @@ public class EmailService {
 
         message.setText(
                 "Click the link to reset your password: " +
-                        "http://localhost:4200/reset-password?token=" + token
+                        frontendUrl +"/reset-password?token=" + token
         );
 
         mailSender.send(message);

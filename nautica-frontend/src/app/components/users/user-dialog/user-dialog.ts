@@ -22,6 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { User } from '../../../models/user.model';
 import {TranslatePipe} from '@ngx-translate/core';
+import {AuthService} from '../../../services/auth';
 
 @Component({
   selector: 'app-user-dialog',
@@ -45,15 +46,18 @@ export class UserDialogComponent {
   userForm!: FormGroup;
   isEdit = false;
   hidePassword = true;
+  userId;
+  isCurrentUser = false;
 
   constructor(
     private fb: FormBuilder,
+    private authService : AuthService,
     private dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User | null
   ) {
     this.isEdit = !!data;
 
-    // Kreiranje forme nakon inicijalizacije FormBuilder-a
+    // create form
     this.userForm = this.fb.group({
       firstname: [''],
       lastname: [''],
@@ -64,8 +68,9 @@ export class UserDialogComponent {
       isAdmin: [false]
     });
 
-    // Ako je izmena, popunjavamo formu postojećim podacima
+    // for update fill form with existing data
     if (data) {
+      this.userId = data.id;
       this.userForm.patchValue({
         firstname: data.firstname || '',
         lastname: data.lastname || '',
@@ -74,14 +79,18 @@ export class UserDialogComponent {
         email: data.email,
         isAdmin: data.isAdmin
       });
+      this.isCurrentUser = data.id === this.getCurrentUserId();
     } else {
-      // Kod dodavanja novog korisnika password je obavezan
+      // new users - password is required
       this.userForm.controls['password'].addValidators(
         Validators.required
       );
-
       this.userForm.controls['password'].updateValueAndValidity();
     }
+  }
+
+  getCurrentUserId(){
+    return this.authService.getCurrentUserId();
   }
 
   save(): void {
@@ -96,15 +105,14 @@ export class UserDialogComponent {
       firstname: formValue.firstname || null,
       lastname: formValue.lastname || null,
       address: formValue.address || null,
+      id: this.userId,
       username: formValue.username,
       email: formValue.email,
       password: formValue.password,
       isAdmin: formValue.isAdmin ?? false
     };
-
     this.dialogRef.close(user);
   }
-
 
   cancel(): void {
     this.dialogRef.close();

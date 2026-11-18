@@ -10,7 +10,12 @@ COPY src ./src
 RUN mvn -B -DskipTests package
 
 # Runtime stage
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
+
+RUN apt-get update \
+    && apt-get install -y ca-certificates \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 

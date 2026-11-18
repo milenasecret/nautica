@@ -1,11 +1,11 @@
 {
   "DOCUMENTS": "Dokumenta",
   "LOGOUT": "Odjava",
-  "UPLOAD_NEW_FILE": "Otpremi novi fajl",
+  "UPLOAD_NEW_FILE": "Otpremi novi dokument",
   "UPLOADING": "Otpremanje...",
-  "UPLOAD_FILE": "Otpremi fajl",
+  "UPLOAD_FILE": "Otpremi dokument",
   "SELECTED": "Selektovano",
-  "NO_FILES_YET": "Nema jos otpremljenih fajlova",
+  "NO_FILES_YET": "Nema jos otpremljenih dokumenata",
   "NAV": {
     "HOME": "Početna",
     "DOCUMENTS": "Dokumenta",
@@ -20,10 +20,10 @@
   "EDIT": "Izmeni",
   "CANCEL": "Otkaži",
   "SAVE": "Sačuvaj izmene",
-  "DOCUMENT_REVIEW_AND_MANAGEMENT": "Pregled i upravljanje dokumentima",
+  "CLOSE": "Zatvori",
   "ADD_NEW_DOCUMENT": "Dodaj novi dokument u svoju kolekciju",
-  "SELECT_FILE": "Izaberi fajl",
-  "NO_FILE_SELECTED": "Nije izabran fajl",
+  "SELECT_FILE": "Izaberi dokument",
+  "NO_FILE_SELECTED": "Nije izabran dokument",
   "OVERVIEW_UPLOADED_DOCUMENTS": "Pregled svih otpremljenih dokumenata",
   "SEARCH_DOCUMENTS": "Pretraži dokumente...",
   "NEWEST_FIRST": "Najnoviji prvo",
@@ -79,5 +79,6 @@
   "RESET_PASSWORD": "Resetuj lozinku",
   "LOGIN_FAILED": "Prijavljivanje nije uspelo. Molimo pokušajte ponovo",
   "FORGOT_PASSWORD_TEXT": "Unesite email adresu povezanu sa vašim nalogom. Poslaćemo vam email sa linkom za resetovanje lozinke. Pratite uputstva u email-u da biste kreirali novu lozinku. Link za resetovanje važi 15 minuta.",
-  "FORGOT_PASSWORD_FAILED": "Zahtev za resetovanje lozinke nije poslat. Molimo pokušajte ponovo"
+  "FORGOT_PASSWORD_FAILED": "Zahtev za resetovanje lozinke nije poslat. Molimo pokušajte ponovo",
+  "RESET_PASSWORD_TEXT": "Unesite novu lozinku"
 }
