@@ -5,7 +5,6 @@ import {
   RouterLinkActive,
   Router
 } from '@angular/router';
-
 import {
   TranslatePipe,
   TranslateService
@@ -19,6 +18,7 @@ import {InfoPopupComponent} from './components/info-popup/info-popup';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {User} from './models/user.model';
 import {filter, Observable, switchMap, tap} from 'rxjs';
+import {InfoPopup} from './models/info-popup.model';
 
 @Component({
   selector: 'app-root',
@@ -80,7 +80,7 @@ export class AppComponent {
         this.currentUser = user;
       },
       error: () => {
-        this.openPopup('Greška prilikom ucitavanja korisnika');
+        this.openPopup(this.translate.instant('ERROR_LOADING_USER'), this.translate.instant('ERROR'));
       }
     });
   }
@@ -114,20 +114,21 @@ export class AppComponent {
       )
     ).subscribe({
       next: () => {
-        this.openPopup(this.translate.instant('USER_UPDATED'));
+        this.openPopup(this.translate.instant('USER_UPDATED'), 'Info');
       },
       error: () => {
-        this.openPopup('Greška prilikom izmene ulogovanog korisnika');
+        this.openPopup(this.translate.instant('ERROR_CHANGING_LOGGED'), this.translate.instant('ERROR'));
       }
     });
   }
 
-  openPopup(messageToShow: string): void {
+  openPopup(messageToShow: string, title:string): void {
+    const dataToSend: InfoPopup = {message: messageToShow, title: title};
     const dialogRefDelete = this.dialog.open(InfoPopupComponent, {
       width: '500px',
       maxWidth: '95vw',
       maxHeight: '95vh',
-      data: messageToShow,
+      data: {...dataToSend},
       autoFocus: false,
       panelClass: 'user-dialog-panel'
     });
