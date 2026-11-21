@@ -1,1 +1,64 @@
-<p>news works!</p>
+<div class="dashboard-container">
+  <!-- Page header -->
+  <header class="page-header">
+    <div class="page-heading">
+      <div>
+        <h1>{{ page?.title }}</h1>
+      </div>
+    </div>
+  </header>
+  <!-- Alerts -->
+  <div *ngIf="message"
+       [class]="'alert alert-' + messageType">
+    {{ message }}
+  </div>
+  <main class="main-content">
+    <!-- News section -->
+    <section class="news-section">
+      <!-- HEADER -->
+      <div class="news-header">
+        <button
+          mat-flat-button
+          class="add-article-button"
+          (click)="addArticle()">
+          <mat-icon>add</mat-icon>
+          {{ 'ADD_ARTICLE' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          class="edit-page-button"
+          (click)="editPage()">
+          <mat-icon>edit</mat-icon>
+          {{ 'EDIT_PAGE' | translate }}
+        </button>
+      </div>
+
+      <div class="articles-grid">
+        <ng-container *ngFor="let article of page?.articles">
+
+          <div
+            class="article-card"
+            *ngIf="article.title || article.shortDescription || article.description">
+
+            <h2 class="article-title">{{ article.title }}</h2>
+
+            <div
+              class="short-description"
+              [innerHTML]="article.shortDescription">
+            </div>
+
+            <div *ngIf="article.shortDescription && article.description">
+              <a class="more-link" [routerLink]="['/articles', article.id]">
+                {{'READ_MORE' | translate }}
+              </a>
+            </div>
+
+          </div>
+
+        </ng-container>
+      </div>
+
+      <!--end news section-->
+    </section>
+  </main>
+</div>

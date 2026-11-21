@@ -98,7 +98,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         this.dataSource.data = users;
       },
       error: () => {
-        this.showMessage('Greška prilikom učitavanja korisnika', 'error');
+        this.showMessage('LOADING_USER_ERROR', 'error');
       }
     });
   }
@@ -155,7 +155,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
           this.loadUsers();
         },
         error: () => {
-          this.showMessage('Greška prilikom dodavanja korisnika', 'error');
+          this.showMessage('CREATE_USER_ERROR', 'error');
         }
       });
     });
@@ -184,7 +184,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
           this.loadUsers();
         },
         error: () => {
-          this.showMessage('Greška prilikom izmene korisnika', 'error');
+          this.showMessage('UPDATE_USER_ERROR', 'error');
         }
       });
     });
@@ -212,7 +212,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
           this.loadUsers();
         },
         error: () => {
-          this.showMessage('Greška prilikom brisanja korisnika', 'error');
+          this.showMessage('DELETE_USER_ERROR', 'error');
         }
       });
     });

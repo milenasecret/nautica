@@ -1,0 +1,17 @@
+<div class="article-detail" *ngIf="article">
+
+  <h1>{{ article.title }}</h1>
+
+  <p class="short-description">
+    {{ article.shortDescription }}
+  </p>
+
+  <div class="description">
+    {{ article.description }}
+  </div>
+
+  <a routerLink="/pages">
+    ← Back to pages
+  </a>
+
+</div>

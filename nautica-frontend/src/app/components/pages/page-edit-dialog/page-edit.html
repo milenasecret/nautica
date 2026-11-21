@@ -1,0 +1,37 @@
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon>edit</mat-icon>
+  {{'EDIT_PAGE' | translate}}
+</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="savePage()" [formGroup]="pageForm" class="dialog-content">
+    <!-- TITLE -->
+    <mat-form-field appearance="outline">
+      <mat-label>{{'TITLE' | translate}}</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        [placeholder]="'TYPE_TITLE' | translate">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<!-- ACTIONS -->
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()">
+    {{'CANCEL' | translate}}
+  </button>
+
+  <button
+    mat-flat-button
+    class="primary-color"
+    type="submit"
+    (click)="savePage()">
+    <mat-icon>save</mat-icon>
+    {{'SAVE' | translate}}
+  </button>
+</mat-dialog-actions>
