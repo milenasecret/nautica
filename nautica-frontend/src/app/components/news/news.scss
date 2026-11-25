@@ -1,18 +1,54 @@
 .news-header {
-   display: flex;
-   justify-content: flex-end;
-   padding-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin: -5px 0 15px;
+
+   button {
+      cursor: pointer;
+      border-radius: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      min-height: 38px;
+      padding: 0 17px;
+
+      border: 1px solid #80caff;
+
+      background: var(--icon-primary-color);
+      color: #fff;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      transition: all 0.2s ease;
+
+      mat-icon {
+        font-size: 19px;
+        width: 19px;
+        height: 19px;
+      }
+
+      &:hover {
+        background: #80caff;
+        color: #08294d;
+        border-color: #80caff;
+      }
+    }
 }
 
 .articles-grid {
-
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
 }
 
 .article-card {
   padding: 14px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  margin-bottom: 10px;
   .article-title {
     font-size: 21px;
   }
@@ -20,22 +56,45 @@
   .more-link {
     display: inline-block;
     margin-top: 15px;
-    color: #2563eb;
+    color: var(--icon-primary-color);
     font-weight: 600;
     text-decoration: none;
+    &:hover {
+       color: #08294d;
+    }
   }
 }
 
-.edit-page-button,
-.add-article-button {
-  padding: 10px 8px;
-  border: none;
-  border-radius: 7px;
-  background: #2563eb;
-  color: white;
-  cursor: pointer;
+.article-action {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.icon-button-edit {
+    color: #0862d9;
+    background: #e7f1ff;
+
+    &:hover {
+      background: #cfe3ff;
+    }
 }
 
-.add-article-button {
-  margin-right: 10px;
+.icon-button-delete {
+    color: #e3212c;
+    background: #ffeaec;
+
+    &:hover {
+      background: #ffd4d8;
+    }
+}
+
+@media (max-width:650px) {
+  .news-header {
+    flex-direction: column;
+    margin: 0 0 18px;
+
+    button {
+      width: 100%;
+    }
+  }
 }

@@ -101,5 +101,13 @@
   "SHORT_DESCRIPTION": "Short description",
   "DESCRIPTION": "Description",
   "EDIT_ARTICLE": "Edit article",
-  "ARTICLE_CREATED": "Article is created"
+  "DELETE_ARTICLE": "Delete article",
+  "ARTICLE_CREATED": "Article is created",
+  "ARTICLE_UPDATED": "Article is updated",
+  "UPDATE_ARTICLE_ERROR": "Error while editing article",
+  "ARTICLE_DELETED": "Article is deleted",
+  "DELETE_ARTICLE_ERROR": "Error while deleting article",
+  "DELETE_ARTICLE_CONFIRMATION": "Are you sure that you want to delete article",
+  "BACK": "Back",
+  "PREVIEW": "Preview"
 }

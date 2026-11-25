@@ -1,9 +1,8 @@
-// src/app/services/document.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Document, ApiResponse } from '../models/document.model';
+import {Document, ApiResponse, FilePageEnum} from '../models/document.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,26 +15,53 @@ export class DocumentService {
   /**
    * Upload a file
    */
-  uploadFile(file: File): Observable<Document> {
+  uploadFile(file: File, pageType: FilePageEnum): Observable<Document> {
     const formData = new FormData();
     formData.append('file', file);
-    
+    formData.append('page', pageType);
+
     return this.http.post<Document>(this.apiUrl, formData);
   }
 
   /**
-   * Get all user documents
+   * Get all documents
    */
-  getUserDocuments(): Observable<Document[]> {
+  getAllDocuments(): Observable<Document[]> {
     return this.http.get<Document[]>(this.apiUrl);
+  }
+
+  /**
+   * Get all documents by page type
+   */
+  getAllDocsByPageType(type: FilePageEnum): Observable<Document[]> {
+    return this.http.get<Document[]>(`${this.apiUrl}/type/${type}`);
+  }
+
+  /**
+   * Preview a file
+   */
+  previewFile(id: number): void {
+    this.http.get(`${this.apiUrl}/${id}`, {
+      responseType: 'blob'
+    }).subscribe(blob => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      window.open(url, '_blank');
+
+      // Free resource after some time
+      setTimeout(() => {
+        window.URL.revokeObjectURL(url);
+      }, 60000);
+    });
   }
 
   /**
    * Download a file
    */
   downloadFile(id: number, fileName: string): void {
-    this.http.get(`${this.apiUrl}/${id}`, { 
-      responseType: 'blob' 
+    this.http.get(`${this.apiUrl}/${id}`, {
+      responseType: 'blob'
     }).subscribe(blob => {
       // Create a download link
       const url = window.URL.createObjectURL(blob);
@@ -43,7 +69,7 @@ export class DocumentService {
       link.href = url;
       link.download = fileName;
       link.click();
-      
+
       // Clean up
       window.URL.revokeObjectURL(url);
     });
@@ -61,11 +87,11 @@ export class DocumentService {
    */
   formatFileSize(bytes: number): string {
     if (bytes === 0) return '0 Bytes';
-    
+
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
+
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
 }

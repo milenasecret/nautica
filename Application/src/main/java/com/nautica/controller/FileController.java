@@ -3,6 +3,7 @@ package com.nautica.controller;
 import com.nautica.dto.ApiResponse;
 import com.nautica.dto.FileResponse;
 import com.nautica.model.FileEntity;
+import com.nautica.model.FilePageEnum;
 import com.nautica.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -30,10 +31,11 @@ public class FileController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FileResponse> uploadFile(
             @RequestParam("file") MultipartFile file,
+            @RequestParam("page") FilePageEnum filePage,
             Authentication auth) throws IOException {
 
         String username = auth.getName();
-        FileResponse response = fileService.uploadFile(file, username);
+        FileResponse response = fileService.uploadFile(file, username, filePage);
         return ResponseEntity.ok(response);
     }
 
@@ -41,6 +43,13 @@ public class FileController {
     @GetMapping
     public ResponseEntity<List<FileResponse>> getAllFiles() {
         List<FileResponse> files = fileService.getAllFiles();
+        return ResponseEntity.ok(files);
+    }
+
+    //fetch all files
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<FileResponse>> findAllByPageType(@PathVariable FilePageEnum type) {
+        List<FileResponse> files = fileService.findAllByPageType(type);
         return ResponseEntity.ok(files);
     }
 

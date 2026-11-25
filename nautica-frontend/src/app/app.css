@@ -1,122 +1,456 @@
-/* Glavna navigacija */
+
+/* =========================================
+   APP LAYOUT
+========================================= */
+:host {
+  display: block;
+  min-height: 100vh;
+  --navy: #06366f;
+  --dark-blue: #052e60;
+  --blue: #0759b5;
+  --light-blue: #43b9ef;
+  --background: #f3f7ff;
+}
+
+.app-page {
+  min-height: 100vh;
+  background: #f4f8ff;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
 .navbar {
+  padding: 0 3%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #263445;
-  color: white;
-  padding: 15px 25px;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 76px;
+  background: linear-gradient(
+    120deg,
+    #08294d 0%,
+    #0b3b69 55%,
+    #105080 100%
+  );
+  color: #fff;
   position: relative;
+  z-index: 100;
+  box-shadow: 0 3px 15px rgba(5, 29, 55, 0.16);
 }
 
-/* Logo */
-.logo {
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+
+/* =========================================
+   BRAND / LOGO
+========================================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #fff;
   text-decoration: none;
+  white-space: nowrap;
+
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: 0.4px;
+
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 34px;
+    color: #80caff;
+  }
 }
 
 
-/* Navigacioni meni */
+/* =========================================
+   CURRENT USER
+========================================= */
+
+.current-user {
+
+  button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+    padding: 0 17px;
+
+    border: 1px solid #80caff;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+
+    mat-icon {
+      font-size: 19px;
+      width: 19px;
+      height: 19px;
+    }
+
+    &:hover {
+      background: #80caff;
+      color: #08294d;
+      border-color: #80caff;
+    }
+  }
+}
+
+
+/* =========================================
+   NAVIGATION MENU
+========================================= */
+
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 30px;
 }
 
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  a {
+    position: relative;
+
+    padding: 10px 0;
+
+    color: #e5eff8;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 3px;
+
+      width: 0;
+      height: 2px;
+
+      background: #80caff;
+      border-radius: 2px;
+
+      transition: width 0.25s ease;
+    }
+
+    &:hover,
+    &.active {
+      color: #80caff;
+    }
+
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
 }
 
-.nav-menu a:hover,
-.nav-menu a.active {
-  color: #64b5f6;
-}
 
-/* Languages */
+/* =========================================
+   LANGUAGE BUTTONS
+========================================= */
+
 .language-buttons {
   display: flex;
-  gap: 8px;
-}
-
-.language-buttons button {
-  display: flex;
   align-items: center;
-  gap: 6px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 14px;
-}
-.language-buttons button span {
-  font-size: 20px;
+  gap: 9px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    span {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: rgba(128, 202, 255, 0.2);
+      border-color: #80caff;
+      transform: translateY(-2px);
+    }
+  }
 }
 
-.btn-logout button {
-  border: 1px solid white;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  background: transparent;
-  cursor: pointer;
-}
-.btn-logout button:hover {
-  color: var(--mat-sys-primary);
-  border: 1px solid var(--mat-sys-primary);
+
+/* =========================================
+   LOGIN / LOGOUT
+========================================= */
+
+.auth-actions {
+  button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+    padding: 0 17px;
+
+    border: 1px solid #80caff;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+
+    mat-icon {
+      font-size: 19px;
+      width: 19px;
+      height: 19px;
+    }
+
+    &:hover {
+      background: #80caff;
+      color: #08294d;
+      border-color: #80caff;
+    }
+  }
 }
 
-.current-user-top button,
-.current-user-top button:hover {
-  border: none;
-}
 
-/* Hamburger dugme */
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
 .menu-toggle {
   display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 26px;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+
   cursor: pointer;
+
+  mat-icon {
+    font-size: 25px;
+    width: 25px;
+    height: 25px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
 }
 
-/* Telefoni i manji ekrani */
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  .primary-color-font {
+    color: var(--mat-sys-primary);
+  }
+}
+
+/* FOOTER */
+.footer {
+  height: 110px;
+  margin-top: 0;
+  position: relative;
+  background: #003d80;
+}
+
+.footer-waves {
+  position: absolute;
+  left: 0;
+  top: -75px;
+  width: 100%;
+  height: 130px;
+  display: block;
+}
+
+/* =========================================
+   RESPONSIVE - TABLETS
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .navbar {
+    padding: 0 3%;
+    gap: 16px;
+  }
+
+  .nav-menu {
+    gap: 17px;
+  }
+
+  .nav-links {
+    gap: 17px;
+  }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+========================================= */
+
 @media (max-width: 768px) {
 
   .navbar {
+    min-height: 68px;
+    padding: 10px 20px;
     flex-wrap: wrap;
+    gap: 10px;
   }
 
   .menu-toggle {
-    display: block;
+    display: flex;
+    flex-shrink: 0;
   }
 
   .nav-menu {
     display: none;
+
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 20px;
+
     width: 100%;
-    gap: 18px;
-    padding: 20px 0 10px;
+    padding: 20px 5px 12px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+
+    &.open {
+      display: flex;
+      animation: menuAppear 0.2s ease;
+    }
   }
 
-  .nav-menu.open {
-    display: flex;
-  }
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
 
-  .nav-menu a {
-    width: 100%;
-    padding: 5px 0;
+    a {
+      display: block;
+      width: 100%;
+      padding: 12px 10px;
+
+      border-radius: 6px;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover,
+      &.active {
+        background: rgba(128, 202, 255, 0.12);
+      }
+    }
   }
 
   .language-buttons {
-    margin-top: 5px;
+    padding: 5px 10px;
+  }
+
+  .auth-actions {
+    padding: 0 10px;
+
+    button {
+      width: 100%;
+    }
+  }
+  .footer {
+    height: 90px;
+  }
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes menuAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+  .navbar {
+    padding: 10px 12px;
+  }
+
+  .brand {
+    font-size: 18px;
+    gap: 5px;
   }
 
 }

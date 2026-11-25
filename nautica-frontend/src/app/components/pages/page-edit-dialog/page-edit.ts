@@ -26,7 +26,6 @@ import {MatInputModule} from '@angular/material/input';
   styleUrl: './page-edit.scss',
 })
 export class PageEditDialogComponent {
-  messageToShow = '';
   pageForm!: FormGroup;
   constructor(
     private translate: TranslateService,
@@ -47,7 +46,7 @@ export class PageEditDialogComponent {
 
   savePage(): void {
     const formValue = this.pageForm.getRawValue();
-    this.dialogRef.close(formValue.title || null);
+    this.dialogRef.close(formValue.title || '');
   }
 
   cancel(): void {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { DocumentService } from '../../services/document';
-import { Document } from '../../models/document.model';
+import {Document, FilePageEnum} from '../../models/document.model';
 import {TranslatePipe} from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -127,7 +127,7 @@ export class DocumentsComponent implements OnInit {
   }
 
   loadDocuments(): void {
-    this.documentService.getUserDocuments().subscribe({
+    this.documentService.getAllDocsByPageType(FilePageEnum.DOCUMENTS).subscribe({
       next: (docs) => {
         this.documents = docs;
       },
@@ -148,7 +148,7 @@ export class DocumentsComponent implements OnInit {
     }
 
     this.isUploading = true;
-    this.documentService.uploadFile(this.selectedFile).subscribe({
+    this.documentService.uploadFile(this.selectedFile, FilePageEnum.DOCUMENTS).subscribe({
       next: (response) => {
         this.showMessage('File uploaded successfully', 'success');
         this.loadDocuments();
@@ -167,12 +167,13 @@ export class DocumentsComponent implements OnInit {
     });
   }
 
+  previewFile(doc: Document): void {
+    this.documentService.previewFile(doc.id);
+  }
 
   downloadFile(doc: Document): void {
     this.documentService.downloadFile(doc.id, doc.filename);
   }
-
-
 
   deleteFile(id: number): void {
     if (confirm('Are you sure you want to delete this file?')) {

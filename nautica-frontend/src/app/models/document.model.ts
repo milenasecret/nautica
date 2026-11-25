@@ -7,6 +7,11 @@ export interface Document {
   uploadedBy: string;
 }
 
+export enum FilePageEnum {
+  DOCUMENTS = 'DOCUMENTS',
+  GALLERY = 'GALLERY'
+}
+
 /**
  * API response wrapper
  */

@@ -1,0 +1,17 @@
+.article-card {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--icon-primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    &:hover {
+      color: #08294d;
+    }
+  }

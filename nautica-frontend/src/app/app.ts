@@ -19,6 +19,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {User} from './models/user.model';
 import {filter, Observable, switchMap, tap} from 'rxjs';
 import {InfoPopup} from './models/info-popup.model';
+import {MatToolbar} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ import {InfoPopup} from './models/info-popup.model';
     TranslatePipe,
     MatIconModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatToolbar
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

@@ -101,5 +101,13 @@
   "SHORT_DESCRIPTION": "Kratak tekst",
   "DESCRIPTION": "Tekst",
   "EDIT_ARTICLE": "Izmeni artikl",
-  "ARTICLE_CREATED": "Artikl je kreiran"
+  "DELETE_ARTICLE": "Izbriši artikl",
+  "ARTICLE_CREATED": "Artikl je kreiran",
+  "ARTICLE_UPDATED": "Artikl je promenjen",
+  "UPDATE_ARTICLE_ERROR": "Greška prilikom editovanja artikla",
+  "ARTICLE_DELETED": "Artikl je izbrisan",
+  "DELETE_ARTICLE_ERROR": "Greška prilikom brisanja artikla",
+  "DELETE_ARTICLE_CONFIRMATION": "Da li ste sigurni da želite da obrišete  artikl",
+  "BACK": "Nazad",
+  "PREVIEW": "Pregled"
 }

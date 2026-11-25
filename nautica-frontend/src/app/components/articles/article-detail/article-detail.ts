@@ -3,11 +3,12 @@ import {Article} from '../../../models/article.model';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {ArticleService} from '../../../services/article.service';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-article-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './article-detail.html',
   styleUrl: './article-detail.scss',
 })

@@ -1,6 +1,6 @@
 package com.nautica.service;
 
-import com.nautica.PageTypeEnum;
+import com.nautica.model.PageTypeEnum;
 import com.nautica.dto.*;
 import com.nautica.exception.ResourceNotFoundException;
 import com.nautica.model.ArticleEntity;
@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

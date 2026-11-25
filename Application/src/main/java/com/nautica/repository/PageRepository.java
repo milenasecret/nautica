@@ -1,6 +1,6 @@
 package com.nautica.repository;
 
-import com.nautica.PageTypeEnum;
+import com.nautica.model.PageTypeEnum;
 import com.nautica.model.PageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +23,7 @@ public interface PageRepository extends JpaRepository<PageEntity, Long> {
         SELECT DISTINCT p
         FROM PageEntity p
         LEFT JOIN FETCH p.articles
-        WHERE p.type = :type
+        WHERE p.pageType = :type
     """)
     Optional<PageEntity> findByTypeWithArticles(@Param("type") PageTypeEnum type);
 }

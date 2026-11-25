@@ -1,17 +1,73 @@
-<div class="article-detail" *ngIf="article">
+<!-- Page header -->
+<section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+        <h1>{{ article?.title }}</h1>
+        <p></p>
+        <div class="hero-underline"></div>
+      </div>
+    </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <!-- Prvi talas - svetloplavi -->
+      <path
+        d="M0 15
+       C180 65 300 90 490 65
+       C690 35 790 15 970 45
+       C1160 75 1300 65 1440 25
+       L1440 150 L0 150 Z"
+        fill="#36a9ed"/>
 
-  <h1>{{ article.title }}</h1>
+      <!-- Drugi talas - plavi -->
+      <path
+        d="M0 35
+       C180 85 320 105 510 80
+       C700 55 830 30 1010 55
+       C1190 80 1320 75 1440 45
+       L1440 150 L0 150 Z"
+        fill="#b8e2fa"/>
 
-  <p class="short-description">
-    {{ article.shortDescription }}
-  </p>
+      <!-- Treći talas - veoma svetloplavi -->
+      <path
+        d="M0 55
+       C190 100 340 115 540 90
+       C750 65 870 45 1050 70
+       C1230 95 1350 85 1440 65
+       L1440 150 L0 150 Z"
+        fill="#eaf3fa"/>
 
-  <div class="description">
-    {{ article.description }}
+      <!-- Četvrti talas - svetla pozadina -->
+      <path
+        d="M0 75
+       C220 115 350 125 550 105
+       C750 85 900 65 1080 88
+       C1250 108 1360 100 1440 85
+       L1440 150 L0 150 Z"
+        fill="#f4f8fc"/>
+
+      <!-- Peti talas - završni sloj -->
+      <path
+        d="M0 95
+       C220 130 370 138 570 120
+       C780 100 920 85 1100 105
+       C1260 122 1370 115 1440 105
+       L1440 150 L0 150 Z"
+        fill="#f4f8ff"/>
+    </svg>
   </div>
+</section >
+<div class="dashboard-container">
+  <main class="main-content-article">
+    <!-- Article section -->
+    <section class="news-section">
+      <div class="article-card"
+           [innerHTML]=article?.description>
+      </div>
 
-  <a routerLink="/pages">
-    ← Back to pages
-  </a>
-
+      <a class="back-link" routerLink="/pages">
+        ← {{ 'BACK' | translate }}
+      </a>
+      <!--end article section-->
+    </section>
+  </main>
 </div>

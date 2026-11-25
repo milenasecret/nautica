@@ -22,6 +22,10 @@ public class FileEntity {
     private Long filesize; // Size in bytes
     
     private String filetype; // MIME type
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private FilePageEnum filePage;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

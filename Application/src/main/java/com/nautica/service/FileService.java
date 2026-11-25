@@ -2,6 +2,7 @@ package com.nautica.service;
 
 import com.nautica.dto.FileResponse;
 import com.nautica.model.FileEntity;
+import com.nautica.model.FilePageEnum;
 import com.nautica.model.User;
 import com.nautica.repository.FileRepository;
 import com.nautica.repository.UserRepository;
@@ -30,7 +31,7 @@ public class FileService {
     private String uploadDir;
 
     //Upload a new file
-    public FileResponse uploadFile(MultipartFile file, String username) throws IOException {
+    public FileResponse uploadFile(MultipartFile file, String username, FilePageEnum filePage) throws IOException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -54,6 +55,7 @@ public class FileService {
         fileEntity.setFilepath(filePath.toString());
         fileEntity.setFilesize(file.getSize());
         fileEntity.setFiletype(file.getContentType());
+        fileEntity.setFilePage(filePage);
         fileEntity.setUser(user);
 
         fileRepository.save(fileEntity);
@@ -61,7 +63,7 @@ public class FileService {
         return toFileResponse(fileEntity);
     }
 
-    // Get all files for a user
+    // Get all files
     public List<FileResponse> getAllFiles() {
         return fileRepository.findAll()
                 .stream()
@@ -69,8 +71,15 @@ public class FileService {
                 .collect(Collectors.toList());
     }
 
-    //Download a file
+    // Get all files by page type
+    public List<FileResponse> findAllByPageType(FilePageEnum type) {
+        return fileRepository.findAllByPageType(type)
+                .stream()
+                .map(this::toFileResponse)
+                .collect(Collectors.toList());
+    }
 
+    //Download a file
     public Resource downloadFile(Long fileId) {
         FileEntity fileEntity = fileRepository.findById(fileId)
                 .orElseThrow(() -> new RuntimeException("File not found"));

@@ -1,6 +1,5 @@
 package com.nautica.model;
 
-import com.nautica.PageTypeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +20,8 @@ public class PageEntity {
     private String title;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private PageTypeEnum type;
+    @Column(nullable = false)
+    private PageTypeEnum pageType;
 
     @OneToMany(
             mappedBy = "page",

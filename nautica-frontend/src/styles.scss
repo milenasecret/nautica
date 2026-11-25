@@ -1,5 +1,5 @@
 @import 'quill/dist/quill.snow.css';
-/* You can add global styles to this file, and also import other style files */
+
 :root {
   --mat-sort-arrow-color: #FFFFFF;
   --icon-color: var(--mat-sys-on-surface);
@@ -8,6 +8,15 @@
   --mat-button-filled-icon-offset: 0px;
   --mat-button-filled-horizontal-padding: 10px;
   --mat-button-filled-icon-spacing: 5px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hole-page {
+  min-height: 100vh;
+  background: var(--background);
 }
 
 .primary-color {
@@ -24,41 +33,73 @@
 
 /* General layout */
 .dashboard-container {
-  color: #1e293b;
-  font-family: Arial, sans-serif;
+  width: 100%;
+  padding: 10px 2.5% 70px;
 }
 
-.page-header {
-  padding: 30px 40px;
+/* =========================
+   HERO IMAGE
+========================= */
+/* HERO */
+
+.hero {
+  height: 330px;
+  position: relative;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(3, 31, 58, .78) 0%,
+      rgba(3, 31, 58, .35) 48%,
+      rgba(3, 31, 58, .05) 100%
+    ),
+    url('/assets/images/sailing-hero.png');
+  background-size: cover;
+  background-position: center 48%;
 }
 
-.page-heading {
-  margin: 0 auto;
+.hero-overlay {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-.page-heading h1 {
-  margin: 0;
-  font-size: 28px;
+.hero-content {
+  padding: 0 3%;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 32px;
+  line-height: 1.1;
   font-weight: 700;
-  color: #1e293b;
+  margin: 0 0 14px;
 }
 
-.page-heading p {
-  margin: 8px 0 0;
-  color: #64748b;
-  font-size: 14px;
+.hero-content p {
+  font-size: 17px;
+  margin: 0;
+  color: rgba(255, 255, 255, .9);
 }
 
-/* Main content */
-.main-content {
-  margin: 0 auto;
-  padding: 10px 24px;
-  .primary-color-font {
-    color: var(--mat-sys-primary);
-  }
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  z-index: 5;
+  overflow: visible;
+  pointer-events: none;
 }
 
-/*search box */
+.hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* search box */
 .search-box {
   display: flex;
   align-items: center;
@@ -134,14 +175,24 @@ quill-editor {
 }
 
 @media (max-width: 768px) {
+ .dashboard-container {
+     padding: 10px 14px 55px;
+ }
 
-  .page-header {
-    padding: 24px 20px;
-  }
+  .hero {
+     height: 270px;
+     background-position: center;
+   }
+   .hero-content{
+      padding: 10px 20px;
+    }
+   .hero-content h1 {
+     font-size: 24px;
+   }
 
-  .main-content {
-    padding: 22px 16px;
-  }
+   .hero-content p {
+     font-size: 13px;
+   }
 }
 
 @media (max-width: 600px) {
@@ -177,7 +228,4 @@ quill-editor {
 
 @media (max-width: 400px) {
 
-  .page-heading h1 {
-    font-size: 24px;
-  }
 }
