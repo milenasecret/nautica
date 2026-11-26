@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Page, PageTypeEnum} from '../../models/page.model';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
@@ -34,18 +34,22 @@ export class NewsComponent implements OnInit {
   message = '';
   messageType: 'success' | 'error' = 'success';
 
+  get pageTypeEnum(): PageTypeEnum {
+    return this.route.snapshot.data['pageTypeEnum'];
+  }
+
   constructor(
-    private route: ActivatedRoute,
     private dialog: MatDialog,
     private authService: AuthService,
     private translate: TranslateService,
     private pageService: PageService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private route : ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.loadPage(PageTypeEnum.NEWS);
+    this.loadPage(this.pageTypeEnum);
   }
 
   get adminIsLogged(){
@@ -60,8 +64,7 @@ export class NewsComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.message = this.translate.instant('PAGE_NOT_LOADED');
-        this.messageType = 'error';
+        this.showMessage('PAGE_NOT_LOADED', 'error');
         this.loading = false;
       }
     });
@@ -110,7 +113,7 @@ export class NewsComponent implements OnInit {
       if (this.page !== null && this.page.id !== undefined) {
         this.articleService.createArticle(result, this.page.id).subscribe({
           next: () => {
-            this.loadPage(PageTypeEnum.NEWS);
+            this.loadPage(this.pageTypeEnum);
             this.showMessage('ARTICLE_CREATED', 'success');
           },
           error: () => {
@@ -140,7 +143,7 @@ export class NewsComponent implements OnInit {
 
       this.articleService.updateArticle(article.id!, result).subscribe({
         next: () => {
-          this.loadPage(PageTypeEnum.NEWS);
+          this.loadPage(this.pageTypeEnum);
           this.showMessage('ARTICLE_UPDATED', 'success');
         },
         error: () => {
@@ -168,7 +171,7 @@ export class NewsComponent implements OnInit {
 
       this.articleService.deleteArticle(result).subscribe({
         next: () => {
-          this.loadPage(PageTypeEnum.NEWS);
+          this.loadPage(this.pageTypeEnum);
           this.showMessage('ARTICLE_DELETED', 'success');
         },
         error: () => {
@@ -177,7 +180,6 @@ export class NewsComponent implements OnInit {
       });
     });
   }
-
 
   private showMessage(msg: string, type: 'success' | 'error'): void {
     this.message = this.translate.instant(msg);

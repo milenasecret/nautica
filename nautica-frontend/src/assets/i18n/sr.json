@@ -8,8 +8,10 @@
   "NO_FILES_YET": "Nema jos otpremljenih dokumenata",
   "NAV": {
     "HOME": "Početna",
+    "NEWS": "Vesti",
     "DOCUMENTS": "Dokumenta",
-    "USERS": "Korisnici"
+    "USERS": "Korisnici",
+    "GALLERY": "Galerija"
   },
   "ABOUT": "O nama",
   "CONTACT": "Kontakt",
@@ -109,5 +111,9 @@
   "DELETE_ARTICLE_ERROR": "Greška prilikom brisanja artikla",
   "DELETE_ARTICLE_CONFIRMATION": "Da li ste sigurni da želite da obrišete  artikl",
   "BACK": "Nazad",
-  "PREVIEW": "Pregled"
+  "PREVIEW": "Pregled",
+  "DELETE_FILE_CONFIRMATION": "Da li ste sigurni da želite da obrišete fajl",
+  "DELETE_FILE": "Izbriši fajl",
+  "FILE_DELETED": "Fajl je izbrisan",
+  "DELETE_FILE_ERROR": "Greška prilikom brisanja fajla"
 }

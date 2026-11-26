@@ -1,0 +1,150 @@
+<!-- Page header -->
+<section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1>{{ 'NAV.GALLERY' | translate }}</h1>
+      <p></p>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+      <!-- Prvi talas - svetloplavi -->
+      <path
+        d="M0 10
+       C180 15 300 45 480 85
+       C650 125 790 130 960 85
+       C1150 35 1300 10 1440 15
+       L1440 150 L0 150 Z"
+        fill="#36a9ed"/>
+      <!-- Drugi talas - plavi -->
+      <path
+        d="M0 28
+       C180 35 310 65 490 100
+       C660 138 800 140 970 100
+       C1160 55 1300 28 1440 32
+       L1440 150 L0 150 Z"
+        fill="#b8e2fa"/>
+      <!-- Treći talas - veoma svetloplavi -->
+      <path
+        d="M0 48
+       C190 55 330 82 520 115
+       C690 145 850 145 1030 112
+       C1200 82 1340 48 1440 52
+       L1440 150 L0 150 Z"
+        fill="#eaf3fa"/>
+      <!-- Četvrti talas - svetla pozadina -->
+      <path
+        d="M0 68
+       C200 75 360 100 550 125
+       C730 148 890 148 1070 125
+       C1240 102 1370 68 1440 72
+       L1440 150 L0 150 Z"
+        fill="#f4f8fc"/>
+      <!-- Peti talas - završni sloj -->
+      <path
+        d="M0 88
+       C220 92 380 112 570 135
+       C760 150 930 150 1110 135
+       C1280 115 1380 88 1440 92
+       L1440 150 L0 150 Z"
+        fill="#f4f8ff"/>
+    </svg>
+  </div>
+</section>
+<div class="dashboard-container">
+  @if (message) {
+  <!-- Alerts -->
+  <div [class]="'alert alert-' + messageType">
+    {{ message }}
+  </div>
+  }
+  <main class="main-content-doc">
+    @if(adminIsLogged()){
+    <!-- Upload section -->
+    <section class="upload-section">
+      <div class="section-heading">
+        <div class="heading-icon">
+          <mat-icon>cloud_upload</mat-icon>
+        </div>
+        <div>
+          <h2>{{ 'UPLOAD_NEW_FILE' | translate }}</h2>
+          <p>{{ 'ADD_NEW_DOCUMENT' | translate }}</p>
+        </div>
+      </div>
+      <div class="upload-area">
+        <input
+          type="file"
+          id="fileInput"
+          (change)="onFileSelected($event)"
+          class="file-input"
+        />
+        <label for="fileInput" class="file-label">
+          <mat-icon>folder_open</mat-icon>
+          {{ 'SELECT_FILE' | translate }}
+        </label>
+        <span class="upload-hint">
+          {{ selectedFile ? selectedFile.name : ('NO_FILE_SELECTED' | translate) }}
+        </span>
+        <button
+          mat-flat-button
+          class="primary-color"
+          (click)="uploadFile()"
+          [disabled]="!selectedFile || isUploading"
+        >
+          <mat-icon>upload</mat-icon>
+          {{ isUploading ? ('UPLOADING' | translate) : ('UPLOAD_FILE' | translate) }}
+        </button>
+      </div>
+      <p *ngIf="selectedFile" class="selected-file">
+        {{ 'SELECTED' | translate }}:
+        {{ selectedFile.name }}
+        ({{ formatSize(selectedFile.size) }})
+      </p>
+    </section>
+    }
+    <!-- Gallery section -->
+    <section class="gallery-section">
+      <!-- Empty state -->
+      <div *ngIf="images.length === 0" class="no-documents">
+        <mat-icon>folder_open</mat-icon>
+        <h3>{{ 'NO_FILES_YET' | translate }}</h3>
+        <p>{{ 'CURRENTLY_NO_UPLOADED_DOCUMENTS' | translate }}</p>
+      </div>
+      @if(images.length > 0){
+      <div class="gallery">
+          @if(adminIsLogged()){
+          <div class="delete-image-action">
+            <button
+              mat-icon-button
+              class="delete-button"
+              [matTooltip]="'DELETE' | translate"
+              (click)="deleteFile(documents[currentIndex])">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+          }
+        <div class="main-image">
+          <button mat-icon-button (click)="previous()">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+
+          <img [src]="images[currentIndex]" />
+
+          <button mat-icon-button (click)="next()">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+
+        <div class="thumbnails">
+          <img
+            *ngFor="let image of images; let i = index"
+            [src]="image"
+            [class.active]="i === currentIndex"
+            (click)="selectImage(i)"
+          />
+        </div>
+      </div>
+      }
+    </section>
+  </main>
+</div>

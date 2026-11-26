@@ -14,8 +14,11 @@
 
 .app-page {
   min-height: 100vh;
-  background: #f4f8ff;
-  overflow: hidden;
+  background: #F0F7FC;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 
@@ -31,10 +34,10 @@
   gap: 20px;
   min-height: 76px;
   background: linear-gradient(
-    120deg,
-    #08294d 0%,
-    #0b3b69 55%,
-    #105080 100%
+    180deg,
+    rgba(0, 48, 115, 0.95) 0%,
+    rgba(5, 75, 145, 0.85) 50%,
+    rgba(35, 115, 175, 0.72) 100%
   );
   color: #fff;
   position: relative;
@@ -308,19 +311,22 @@
 
 /* FOOTER */
 .footer {
-  height: 110px;
-  margin-top: 0;
   position: relative;
-  background: #003d80;
-}
-
-.footer-waves {
-  position: absolute;
-  left: 0;
-  top: -75px;
   width: 100%;
   height: 130px;
-  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  .footer-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
 }
 
 /* =========================================
@@ -414,9 +420,6 @@
     button {
       width: 100%;
     }
-  }
-  .footer {
-    height: 90px;
   }
 }
 

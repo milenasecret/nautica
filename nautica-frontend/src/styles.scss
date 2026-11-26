@@ -14,11 +14,6 @@
   box-sizing: border-box;
 }
 
-.hole-page {
-  min-height: 100vh;
-  background: var(--background);
-}
-
 .primary-color {
   color: var(--icon-primary-color);
 }
@@ -34,7 +29,7 @@
 /* General layout */
 .dashboard-container {
   width: 100%;
-  padding: 10px 2.5% 70px;
+  padding: 10px 2.5% 10px;
 }
 
 /* =========================
@@ -45,16 +40,9 @@
 .hero {
   height: 330px;
   position: relative;
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(3, 31, 58, .78) 0%,
-      rgba(3, 31, 58, .35) 48%,
-      rgba(3, 31, 58, .05) 100%
-    ),
-    url('/assets/images/sailing-hero.png');
+  background-image: url('/assets/images/sailing-hero-logo.jpg');
   background-size: cover;
-  background-position: center 48%;
+  background-position: center 100%;
 }
 
 .hero-overlay {

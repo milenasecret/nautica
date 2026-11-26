@@ -1,134 +1,153 @@
 <div class="app-page">
   <header class="navbar">
-      <!-- Logo -->
-      <a routerLink="/"
-        class="brand"
-        (click)="closeMenu()"
-        aria-label="NK Tikvara">
-        <mat-icon>sailing</mat-icon>
-        <span>NK Tikvara</span>
-      </a>
+    <!-- Logo -->
+    <a routerLink="/"
+       class="brand"
+       (click)="closeMenu()"
+       aria-label="NK Tikvara">
+      <mat-icon>sailing</mat-icon>
+      <span>NK Tikvara</span>
+    </a>
 
-      <!-- Current user -->
-      @if (userIsLogged()) {
-      <div class="current-user">
-        <button mat-button
-          type="button"
-          [matTooltip]="'EDIT_USER' | translate"
-          (click)="editCurrentUser()">
-          <mat-icon>account_circle</mat-icon>
-          <span>{{ getCurrentUsername() }}</span>
+    <!-- Current user -->
+    @if (userIsLogged()) {
+    <div class="current-user">
+      <button mat-button
+              type="button"
+              [matTooltip]="'EDIT_USER' | translate"
+              (click)="editCurrentUser()">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{ getCurrentUsername() }}</span>
+      </button>
+    </div>
+    }
+
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle"
+            type="button"
+            (click)="toggleMenu()"
+            [attr.aria-expanded]="menuOpen"
+            aria-label="Toggle navigation">
+      <mat-icon>
+        {{ menuOpen ? 'close' : 'menu' }}
+      </mat-icon>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav-menu"
+         [class.open]="menuOpen"
+         aria-label="Main navigation">
+
+      <div class="nav-links">
+        <a routerLink="/home"
+           routerLinkActive="active"
+           (click)="closeMenu()">
+          {{ 'NAV.HOME' | translate }}
+        </a>
+        <a routerLink="/news"
+           routerLinkActive="active"
+           (click)="closeMenu()">
+          {{ 'NAV.NEWS' | translate }}
+        </a>
+        <a routerLink="/gallery"
+           routerLinkActive="active"
+           (click)="closeMenu()">
+          {{ 'NAV.GALLERY' | translate }}
+        </a>
+        @if (isLoggedIn) {
+        <a routerLink="/documents"
+           routerLinkActive="active"
+           (click)="closeMenu()">
+          {{ 'NAV.DOCUMENTS' | translate }}
+        </a>
+        }
+        @if (adminIsLogged()) {
+        <a routerLink="/users"
+           routerLinkActive="active"
+           (click)="closeMenu()">
+          {{ 'NAV.USERS' | translate }}
+        </a>
+        }
+      </div>
+
+      <!-- Language selection -->
+      <div class="language-buttons" aria-label="Language selection">
+        <button type="button"
+                aria-label="Srpski jezik"
+                (click)="changeLanguage('sr')">
+          <span class="fi fi-rs"></span>
+        </button>
+
+        <button type="button"
+                aria-label="English language"
+                (click)="changeLanguage('en')">
+          <span class="fi fi-gb"></span>
         </button>
       </div>
-      }
 
-      <!-- Mobile menu toggle -->
-      <button class="menu-toggle"
-        type="button"
-        (click)="toggleMenu()"
-        [attr.aria-expanded]="menuOpen"
-        aria-label="Toggle navigation">
-        <mat-icon>
-          {{ menuOpen ? 'close' : 'menu' }}
-        </mat-icon>
-      </button>
-
-      <!-- Navigation -->
-      <nav class="nav-menu"
-        [class.open]="menuOpen"
-        aria-label="Main navigation">
-
-        <div class="nav-links">
-          <a routerLink="/news"
-            routerLinkActive="active"
-            (click)="closeMenu()">
-            {{ 'NAV.HOME' | translate }}
-          </a>
-          @if (isLoggedIn) {
-          <a routerLink="/documents"
-            routerLinkActive="active"
-            (click)="closeMenu()">
-            {{ 'NAV.DOCUMENTS' | translate }}
-          </a>
-          }
-          @if (adminIsLogged()) {
-          <a routerLink="/users"
-            routerLinkActive="active"
-            (click)="closeMenu()">
-            {{ 'NAV.USERS' | translate }}
-          </a>
-          }
-        </div>
-
-        <!-- Language selection -->
-        <div class="language-buttons" aria-label="Language selection">
-          <button type="button"
-            aria-label="Srpski jezik"
-            (click)="changeLanguage('sr')">
-            <span class="fi fi-rs"></span>
-          </button>
-
-          <button type="button"
-            aria-label="English language"
-            (click)="changeLanguage('en')">
-            <span class="fi fi-gb"></span>
-          </button>
-        </div>
-
-        <!-- Authentication -->
-        <div class="auth-actions">
-          @if (isLoggedIn) {
-          <button mat-flat-button
-            type="button"
-            (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            {{ 'LOGOUT' | translate }}
-          </button>
-          } @else {
-          <button mat-flat-button
-            type="button"
-            (click)="login()">
-            <mat-icon>login</mat-icon>
-            {{ 'LOGIN' | translate }}
-          </button>
-          }
-        </div>
-      </nav>
+      <!-- Authentication -->
+      <div class="auth-actions">
+        @if (isLoggedIn) {
+        <button mat-flat-button
+                type="button"
+                (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          {{ 'LOGOUT' | translate }}
+        </button>
+        } @else {
+        <button mat-flat-button
+                type="button"
+                (click)="login()">
+          <mat-icon>login</mat-icon>
+          {{ 'LOGIN' | translate }}
+        </button>
+        }
+      </div>
+    </nav>
   </header>
   <!-- Page content -->
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>
-  <!-- FOOTER SA TALASIMA -->
+  <!-- FOOTER with waves -->
   <footer class="footer">
     <svg class="footer-waves"
          viewBox="0 0 1536 130"
          preserveAspectRatio="none">
-
+      <!-- Prvi svetli talas -->
       <path
         d="M0 55 C180 20 300 45 480 70 C680 100 810 100 970 65 C1150 25 1300 35 1536 50 L1536 130 L0 130 Z"
-        fill="#8bcaf5"/>
+        fill="#8bcaf5"
+        fill-opacity="0.65"/>
 
+      <!-- Drugi talas -->
       <path
         d="M0 82 C190 40 310 70 490 88 C680 108 830 112 1010 85 C1210 55 1370 62 1536 75 L1536 130 L0 130 Z"
-        fill="#178bd5"/>
+        fill="#178bd5"
+        fill-opacity="0.82"/>
 
+      <!-- Treći talas -->
       <path
         d="M0 100 C190 65 340 82 520 100 C730 122 870 115 1060 98 C1250 80 1390 85 1536 92 L1536 130 L0 130 Z"
-        fill="#07509a"/>
+        fill="#07509a"
+        fill-opacity="0.90"/>
 
+      <!-- Završni tamni talas -->
       <path
         d="M0 115 C220 88 370 100 560 116 C760 132 940 128 1120 112 C1300 97 1420 105 1536 110 L1536 130 L0 130 Z"
         fill="#003d80"/>
 
-      <!-- Mala jedrilica desno -->
+      <!-- Small sailing boat on the right -->
       <g transform="translate(1390 5)" fill="#d8edff">
         <path d="M40 0 L40 78 L5 78 Z"/>
         <path d="M46 18 L46 78 L78 78 Z"/>
         <path d="M0 82 Q40 95 85 82 L72 98 L17 98 Z"/>
         <path d="M40 0 L40 98" stroke="#d8edff" stroke-width="2"/>
       </g>
-
+      <!-- Peti talas – popunjava donji deo SVG-a -->
+      <path
+        d="M0 125 C200 112 380 118 560 125 C760 135 940 132 1120 122 C1300 115 1430 120 1536 122 L1536 130 L0 130 Z"
+        fill="#002f68"/>
     </svg>
   </footer>
 </div>

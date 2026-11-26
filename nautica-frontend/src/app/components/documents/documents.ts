@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
+import {ArticleDialogDeleteComponent} from '../articles/article-dialog-delete/article-dialog-delete';
+import {MatDialog} from '@angular/material/dialog';
+import {DocumentDialogDeleteComponent} from '../document-dialog-delete/document-dialog-delete';
 
 @Component({
   selector: 'app-documents',
@@ -34,7 +37,8 @@ export class DocumentsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -175,25 +179,35 @@ export class DocumentsComponent implements OnInit {
     this.documentService.downloadFile(doc.id, doc.filename);
   }
 
-  deleteFile(id: number): void {
-    if (confirm('Are you sure you want to delete this file?')) {
-      this.documentService.deleteFile(id).subscribe({
-        next: (response) => {
-          this.showMessage('File deleted successfully', 'success');
+  deleteFile(doc: Document): void {
+    const dialogRefDelete = this.dialog.open(DocumentDialogDeleteComponent, {
+      width: '500px',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
+      data: {...doc},
+      autoFocus: false,
+      panelClass: 'document-dialog-panel'
+    });
+
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+
+      this.documentService.deleteFile(result.id).subscribe({
+        next: () => {
           this.loadDocuments();
+          this.showMessage('FILE_DELETED', 'success');
         },
-        error: (error) => {
-          this.showMessage('Failed to delete file', 'error');
+        error: () => {
+          this.showMessage('DELETE_FILE_ERROR', 'error');
         }
       });
-    }
+    });
   }
-
-
   formatSize(bytes: number): string {
     return this.documentService.formatFileSize(bytes);
   }
-
 
   formatDate(dateString: string): string {
     return new Date(dateString).toLocaleString();

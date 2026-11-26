@@ -1,14 +1,14 @@
-import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Inject} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
   MatDialogRef
 } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import { Article } from "../../../models/article.model";
+import {Article} from "../../../models/article.model";
 
 @Component({
   selector: 'app-article-dialog-delete',
@@ -25,7 +25,7 @@ import { Article } from "../../../models/article.model";
 })
 export class ArticleDialogDeleteComponent {
   messageToShow = '';
-  articleIdToDelete:number | null = null;
+  articleIdToDelete: number | null = null;
 
   constructor(
     private translate: TranslateService,
@@ -34,7 +34,7 @@ export class ArticleDialogDeleteComponent {
   ) {
     if (data) {
       let title = data.title != null ? data.title : '';
-      this.messageToShow = this.translate.instant('DELETE_ARTICLE_CONFIRMATION') + title;
+      this.messageToShow = this.translate.instant('DELETE_ARTICLE_CONFIRMATION') + ' ' + title;
       if (data.id != null) {
         this.articleIdToDelete = data.id;
       }

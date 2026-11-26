@@ -11,9 +11,10 @@ export interface PageUpdateRequest {
 }
 
 export interface PageTypeRequest {
-  type: string;
+  type: PageTypeEnum;
 }
 
 export enum PageTypeEnum {
-  NEWS = 'NEWS'
+  NEWS = 'NEWS',
+  HOME = 'HOME'
 }
